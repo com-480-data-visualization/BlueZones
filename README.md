@@ -2,9 +2,9 @@
 
 | Student's name | SCIPER |
 | -------------- | ------ |
-| | |
-| | |
-| | |
+| Achour Myriam Sarah| 415138 |
+| Ben Fraj Yaman | 346591 |
+| Poulou Ioanna | 416522 |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
