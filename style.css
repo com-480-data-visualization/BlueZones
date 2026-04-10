@@ -1,5 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,400&display=swap');
 
+/* Color Palette */
+:root {
+    /* Base */
+    --color-white: #ffffff;
+    --color-text: #1b2a4a;
+
+    /* Blue Zones palette */
+    --color-bg-page: #e6f3ff;
+    --color-bg-panel: #d5ebff;
+    --color-title: #2890ff;
+    --color-card: #fafafa;
+    --color-border: #7596ef7c;
+
+    /* Utility colors */
+    --color-black-35: rgba(0, 0, 0, 0.35);
+    --color-black-45: rgba(0, 0, 0, 0.45);
+    --color-glass-bg: rgba(255, 255, 255, 0.1);
+    --color-glass-border: #0000000e;
+
+    /* Shadows */
+    --shadow-card: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+                   rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    --shadow-title: 0px 3px 15px #00000060;
+
+    /* Gradients */
+    --gradient-card-back: linear-gradient(180deg, #eef4ff 0%, #dce9ff 100%);
+    --gradient-name-overlay: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0));
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,6 +37,7 @@
     scroll-snap-type: y mandatory;
 }
 
+/* Landing Page Section */
 .landing-page-section {
     height: 100vh;
     position: relative;
@@ -26,12 +56,12 @@
     position: absolute;
     top: 45%;
     width: 100%;
-    color: white;
+    color: var(--color-white);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-shadow: 0px 3px 15px #00000060;
+    text-shadow: 0px 3px 15px var(--color-black-45);
 }
 
 .landing-page-title h1 {
@@ -42,15 +72,12 @@
     font-size: 18px;
 }
 
-
-
-
-
+/* Explanation Section */
 .explanation-section {
-    height: 100vh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    background-color: rgb(230, 243, 255);
+    height: 100vh;
+    background-color: var(--color-bg-page);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,35 +86,31 @@
 
 .explanation-container {
     width: 50%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--color-white);
     border-radius: 20px;
     padding: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    box-shadow: var(--shadow-card);
 }
 
 .explanation-container h2 {
     padding-bottom: 10px;
 }
 
-
-
-
-
+/* Cards and Globe Section */
 .cards-globe-section {
     height: 100vh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    background-color: rgb(230, 243, 255);
+    background-color: var(--color-bg-page);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
 .cards-globe-title {
     font-size: 28px;
-    color: rgb(40, 144, 255);
+    color: var(--color-title);
     padding: 5px;
 }
 
@@ -95,64 +118,95 @@
     display: grid;
     grid-template-rows: 2fr 3fr;
     height: 100%;
+    width: 100%;
     padding-top: 40px;
 }
 
 .cards-container {
-    height: 100%;
-    /* background-color: red; */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 20px;
-    padding: 0 50px 0 50px;
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+    gap: 16px;
+    width: 100%;
 }
 
 .blue-zone-card {
-    background-color: rgb(250, 250, 250);
-    border-radius: 20px;
+    position: relative;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-    border: 1px solid #7596ef7c;
-    padding: 20px;
-}
-
-.blue-zone-card:hover {
+    height: 340px;
+    border-radius: 20px;
+    overflow: hidden;
+    perspective: 1000px;
     cursor: pointer;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    background: var(--color-card);
 }
 
-.blue-zone-card .blue-zone-card-front {
+.blue-zone-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+.blue-zone-card.is-flipped .blue-zone-card-inner {
+    transform: rotateY(180deg);
+}
+
+.blue-zone-card-front,
+.blue-zone-card-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.blue-zone-card-front {
+    z-index: 2;
+}
+
+.blue-zone-card-back {
+    transform: rotateY(180deg);
+    background: var(--gradient-card-back);
+    color: var(--color-text);
+    padding: 16px 18px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
 }
 
-.blue-zone-card-front .blue-zone-card-emoji {
-    font-size: 64px;
+.blue-zone-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.blue-zone-card-front .blue-zone-card-name {
-    padding-top: 10px;
-    font-size: 26px;
+.blue-zone-card-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 12px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-white);
+    text-shadow: 0 1px 4px var(--color-black-35);
+    z-index: 3;
 }
 
-.blue-zone-card .blue-zone-card-back {
-    opacity: 0;
-}
-
-
-
-
-
-
-
+/* Map Section */
 .map-section {
     height: 100vh;
-    background-color: rgb(230, 243, 255);
+    background-color: var(--color-bg-page);
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 10px;
@@ -188,9 +242,9 @@
     position: absolute;
     top: 3%;
     right: 3%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--color-glass-bg);
     backdrop-filter: blur(30px);
-    border: #0000000e 1px solid;
+    border: var(--color-border);
 }
 
 .radio-btn-container {
@@ -202,13 +256,9 @@
     gap: 10px;
 }
 
-
-
-
-
 .right-container {
     width: 100%;
     height: 100%;
-    background-color: rgb(213, 235, 255);
+    background-color: var(--color-bg-panel);
     border-radius: 20px;
 }
