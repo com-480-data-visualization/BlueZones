@@ -34,7 +34,70 @@
     margin: 0;
     padding: 0;
     font-family: "Open Sans";
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
     scroll-snap-type: y mandatory;
+}
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 12px 20px;
+}
+
+/* Navbar */
+.navbar {
+    max-width: 80%;
+    margin: 0 auto;
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+}
+
+.navbar__brand {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 16px;
+}
+
+.navbar__logo {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.navbar__links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto; 
+}
+
+.navbar__links a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar__links a:hover {
+    background: var(--color-bg-panel);
+    color: var(--color-title);
 }
 
 /* Landing Page Section */
@@ -211,14 +274,6 @@
   flex: 0 0 30%;
   min-width: 0;
 }
-
-
-
-
-
-
-
-
 
 /* Map Section */
 .map-section {

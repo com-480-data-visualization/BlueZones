@@ -11,8 +11,25 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="#landing" class="navbar__brand" aria-label="Go to Home">
+                <img src="img/logo.png" alt="Blue Zones logo" class="navbar__logo">
+            </a>
+
+            <ul class="navbar__links">
+                <li><a href="#landing">Home</a></li>
+                <li><a href="#explanation">About</a></li>
+                <li><a href="#cards">Zones</a></li>
+                <li><a href="#map">Map</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+            </ul>
+            </nav>
+    </header>
+
     <!-- Landing Page Section -->
-    <section class="landing-page-section">
+    <section id="landing" class="landing-page-section">
 
         <video loop autoplay class="landing-page-video">
             <!-- Source of the video: https://videos.pexels.com/video-files/36658286/15541096_3840_2160_60fps.mp4 -->
@@ -28,7 +45,7 @@
     </section>
 
     <!-- Explanation Section -->
-    <section class="explanation-section">
+    <section id="explanation" class="explanation-section">
         <div class="explanation-container">
             <h2>What are Blue Zones ?</h2>
             <p>
@@ -44,7 +61,7 @@
     </section>
 
     <!-- Cards and Globe Section -->
-    <section class="cards-globe-section">
+    <section id="cards" class="cards-globe-section">
         <h2 class="cards-globe-title">The 5 Blue Zones</h2>
 
         <div class="cards-globe-container">
@@ -131,7 +148,7 @@
     </section>
 
     <!-- Map Section -->
-    <section class="map-section">
+    <section id="map" class="map-section">
 
         <div class="map-container">
 
