@@ -38,8 +38,8 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 84px;
     scroll-snap-type: y mandatory;
+    overflow-x: hidden;
 }
 
 .site-header {
@@ -169,12 +169,13 @@ html {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    overflow: hidden;
 }
 
 .cards-globe-title {
     font-size: 28px;
     color: var(--color-title);
-    padding: 5px;
+    padding-top: 90px;
 }
 
 .cards-globe-container {
@@ -196,7 +197,7 @@ html {
 .blue-zone-card {
     position: relative;
     width: 100%;
-    height: 340px;
+    height: 300px;
     border-radius: 20px;
     perspective: 1000px;
     cursor: pointer;
@@ -281,6 +282,9 @@ html {
     height: 100%;
 }
 
+
+
+
 /* Map Section */
 .map-section {
     height: 100vh;
@@ -288,7 +292,7 @@ html {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 10px;
-    padding: 20px;
+    padding: 80px 20px 20px 20px;
     scroll-snap-align: start;
     scroll-snap-stop: always;
 }
