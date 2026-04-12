@@ -39,7 +39,7 @@ d3.json("data/world_countries_geojson.geojson").then(geoData => {
                 {axis: "80% rule", value: Math.random()},
                 {axis: "Activity", value: Math.random()},
                 {axis: "Happiness", value: Math.random()},
-                {axis: "Wine consumption", value: Math.random()}
+                {axis: "Wine %", value: Math.random()}
             ];
 
             drawRadar(radarData, countryName, "#radar-tooltip");

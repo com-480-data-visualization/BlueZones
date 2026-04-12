@@ -45,15 +45,23 @@ function drawRadar(data, countryName, selector) {
 
     features.forEach((f, i) => {
         const angle = (Math.PI * 2 * i / totalAxes) + angleOffset;
-        const labelRadius = radius * 1.15; 
         
+        const labelRadius = radius * 1.17; 
+        
+        const x = labelRadius * Math.cos(angle);
+        const y = labelRadius * Math.sin(angle);
+
+        let textAnchor = "middle";
+        if (Math.cos(angle) > 0.1) textAnchor = "start"; 
+        else if (Math.cos(angle) < -0.1) textAnchor = "end"; 
+
         svg.append("text")
-            .attr("x", labelRadius * Math.cos(angle))
-            .attr("y", labelRadius * Math.sin(angle))
-            .attr("text-anchor", "middle")
+            .attr("x", x)
+            .attr("y", y)
+            .attr("text-anchor", textAnchor) 
             .attr("alignment-baseline", "middle")
             .style("fill", "#ffffff")
-            .style("font-size", "11px")
+            .style("font-size", "12px")
             .style("font-weight", "600")
             .text(f);
     });
