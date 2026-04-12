@@ -7,7 +7,7 @@
     --color-text: #1b2a4a;
 
     /* Blue Zones palette */
-    --color-bg-page: #e6f3ff;
+    --color-bg-page: #0f172a;
     --color-bg-panel: #d5ebff;
     --color-title: #2890ff;
     --color-card: #fafafa;
@@ -38,7 +38,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     overflow-x: hidden;
 }
 
@@ -286,61 +286,136 @@ html {
 
 
 /* Map Section */
+
 .map-section {
-    height: 100vh;
-    background-color: var(--color-bg-page);
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 10px;
-    padding: 80px 20px 20px 20px;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    background-color: #0f172a; 
+    min-height: 100vh;
+    padding: 80px 2.5%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.map-container {
+.dashboard-wrapper {
+    display: flex;
+    justify-content: center; 
+    width: 100%;
+    max-width: 1300px; 
+    height: 87vh; 
+}
+
+
+.card {
+    background-color: #1e293b; 
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    color: var(--color-white);
+}
+
+
+.map-card { 
+    width: 100%; 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden;
+    padding-top: 20px; 
+}
+#radar-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: rgba(30, 41, 59, 0.95); 
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 15px;
+    display: none; 
+    z-index: 1000;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    min-width: 350px;
+}
+.card-title {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.svg-container {
     width: 100%;
     height: 100%;
-    background-color: rgb(213, 235, 255);
-    border-radius: 20px;
     position: relative;
 }
 
-#map-plot {
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-}
-
-.radio-btns-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 20%;
-    border-radius: 20px;
-    padding: 20px;
-    gap: 10px;
-
+.controls-overlay {
     position: absolute;
-    top: 3%;
-    right: 3%;
-    background-color: var(--color-glass-bg);
-    backdrop-filter: blur(30px);
-    border: var(--color-border);
+    top: 15px; 
+    right: 20px;
 }
 
-.radio-btn-container {
-    width: 100%;
+.radio-group {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 5px 10px;
     display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    gap: 10px;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #cbd5e1;
 }
 
-.right-container {
+
+/* --- Footer Section --- */
+.site-footer {
+    background-color: #020617; 
+    border-top: 1px solid #334155;
+    padding: 25px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-content {
     width: 100%;
-    height: 100%;
-    background-color: var(--color-bg-panel);
-    border-radius: 20px;
+    max-width: 1300px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: #94a3b8; 
+    font-size: 0.95rem;
+}
+
+.team-names {
+    display: flex;
+    align-items: center;
+}
+
+.team-names strong {
+    color: #f8fafc; 
+    margin: 0 5px;
+}
+
+.course-handle a {
+    color: #38bdf8; 
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    padding: 8px 12px;
+    background-color: rgba(56, 189, 248, 0.1);
+    border-radius: 8px;
+}
+
+.course-handle a:hover {
+    color: #f8fafc;
+    background-color: #38bdf8;
+}
+
+@media (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
 }
