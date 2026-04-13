@@ -27,11 +27,12 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
             d3.select(this)
                 .style("filter", "brightness(1.3)")
                 .attr("stroke", "#ffffff")
-                .attr("stroke-width", 1.2);
+                .attr("stroke-width", 0.5);
 
-            //console.log(event)
+            //console.log(event);
+            //console.log(d);
 
-            const countryName = event.properties.name;
+            const countryName = d.properties.name;
             
             const tooltip = d3.select("#radar-tooltip");
             tooltip.style("display", "block").html(""); 
