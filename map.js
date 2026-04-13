@@ -9,9 +9,12 @@ const projection = d3.geoMercator()
 
 const pathGenerator = d3.geoPath().projection(projection);
 
-d3.json("data/world_countries_geojson.geojson").then(geoData => {
+d3.json("data/countries-50m.json").then((topojson_raw) => {
+
+	const countries_paths = topojson.feature(topojson_raw, topojson_raw.objects.countries);
+
     mapSvg.selectAll("path")
-        .data(geoData.features)
+        .data(countries_paths.features)
         .enter()
         .append("path")
         .attr("class", "country")
