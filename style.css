@@ -361,6 +361,7 @@ html {
     border-radius: 8px;
     padding: 5px 10px;
     display: flex;
+    align-items: center;
     gap: 15px;
     font-size: 0.9rem;
     color: #cbd5e1;
