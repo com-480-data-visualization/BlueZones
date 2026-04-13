@@ -288,6 +288,8 @@ html {
 /* Map Section */
 
 .map-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     background-color: #0f172a; 
     min-height: 100vh;
     padding: 80px 2.5%; 
