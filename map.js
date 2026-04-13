@@ -29,7 +29,9 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
                 .attr("stroke", "#ffffff")
                 .attr("stroke-width", 1.2);
 
-            const countryName = d.properties.name || d.properties.NAME;
+            //console.log(event)
+
+            const countryName = event.properties.name;
             
             const tooltip = d3.select("#radar-tooltip");
             tooltip.style("display", "block").html(""); 
