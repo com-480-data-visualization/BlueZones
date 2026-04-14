@@ -24,7 +24,7 @@ async function initBlueZonesGlobe() {
         .attr("fill", "#b7dcff")
         .attr("stroke", "#7aa7d9");
 
-    const world = await d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json");
+    const world = await d3.json("data/countries-110m.json");
     const countries = topojson.feature(world, world.objects.countries);
 
     svg.append("g")
