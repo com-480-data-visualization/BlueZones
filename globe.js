@@ -3,7 +3,8 @@ async function initBlueZonesGlobe() {
 
     const width = container.clientWidth;
     const height = container.clientHeight;
-    const radius = Math.min(width, height) * 0.42;
+    const radius = Math.min(width, height) * 1.25;
+    const blueZonesCountries = ["United States of America", "Japan", "Greece", "Costa Rica", "Italy"];
 
     const svg = d3
         .select(container)
@@ -32,7 +33,13 @@ async function initBlueZonesGlobe() {
         .data(countries.features)
         .join("path")
         .attr("d", path)
-        .attr("fill", "#eaf4ff")
+        .attr("fill", (c) => {
+            if (blueZonesCountries.includes(c.properties.name)) {
+                return "#339dff";
+            } else {
+                return "#eaf4ff";
+            }
+        })
         .attr("stroke", "#9bbce6")
         .attr("stroke-width", 0.5);
 
@@ -46,6 +53,7 @@ async function initBlueZonesGlobe() {
         projection.rotate([rotate[0] + event.dx * k, rotate[1] - event.dy * k]);
         })
     );
+    
 }
 
 document.addEventListener("DOMContentLoaded", initBlueZonesGlobe);

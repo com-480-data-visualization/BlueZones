@@ -168,7 +168,6 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
     overflow: hidden;
 }
 
@@ -197,7 +196,7 @@ html {
 .blue-zone-card {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 250px;
     border-radius: 20px;
     perspective: 1000px;
     cursor: pointer;
@@ -282,7 +281,12 @@ html {
     height: 100%;
 }
 
-
+#bluezones-globe svg {
+    position: relative;
+    top: 300px;
+    overflow: visible;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+}
 
 
 /* Map Section */
