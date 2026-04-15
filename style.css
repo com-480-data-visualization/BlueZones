@@ -108,7 +108,7 @@ html {
     scroll-snap-stop: always;
 }
 
-.landing-page-video {
+.landing-page-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
