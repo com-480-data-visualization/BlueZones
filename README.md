@@ -18,6 +18,9 @@
 
 **10% of the final grade**
 
+[Milestone 2 report (PDF)](Milestone2/Milestone2.pdf)
+
+[Milestone 2 Website](https://com-480-data-visualization.github.io/BlueZones/)
 
 ## Milestone 3 (29th May, 5pm)
 
