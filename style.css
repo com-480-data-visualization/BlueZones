@@ -339,7 +339,6 @@ html {
     display: none; 
     z-index: 1000;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    min-width: 350px;
 }
 .card-title {
     margin-top: 0;
