@@ -31,13 +31,9 @@
     <!-- Landing Page Section -->
     <section id="landing" class="landing-page-section">
 
-        <!-- <video loop autoplay class="landing-page-video"> -->
-            <!-- Source of the video: https://videos.pexels.com/video-files/36658286/15541096_3840_2160_60fps.mp4 -->
-            <!-- Placeholder video for the moment, should be updated -->
-            <!-- <source src="video/okinawa.mp4">
-        </video> -->
-
-        <img src="./img/okinawa-img.webp" class="landing-page-img">
+        <video loop autoplay muted playsinline class="landing-page-video">
+            <source src="video/okinawa.mp4" type="video/mp4">
+        </video>
 
         <div class="landing-page-title">
             <h1>Blue Zones: The Path To 100</h1>
@@ -216,6 +212,36 @@
         </div>
     </section>
 
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-section">
+        <h2 class="quiz-title">Time for Some Fun!</h2>
+        <p class="quiz-subtitle">Let's see how much you learnt about Blue Zones</p>
+        <div class="quiz-inner">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress" style="width:0%"></div>
+            </div>
+
+            <div class="quiz-panel" id="quiz-panel">
+                <div class="q-label" id="q-label"></div>
+                <div class="q-text"  id="q-text"></div>
+                <div class="options" id="opts"></div>
+                <div class="info-panel" id="info-panel" aria-live="polite"></div>
+            </div>
+
+            <div class="btn">
+                <button class="btn-next" id="next-btn" disabled>Next →</button>
+            </div>
+
+            <div class="score-card" id="score-card" hidden>
+                <div class="score-big"></div>
+                <div class="score-sub">questions correct</div>
+                <div class="level-desc"></div>
+                <button class="btn-restart" id="btn-restart">Restart quiz</button>
+            </div>
+        </div>
+    </section>
+
+
     <footer class="site-footer">
         <div class="footer-content">
             <div class="team-names">
@@ -243,6 +269,7 @@
     <script src="radar.js"></script> 
     <script src="map.js"></script>
     <script src="animation_landingpage.js"></script>
+    <script src="quiz.js"></script>
 
 </body>
 
