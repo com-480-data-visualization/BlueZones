@@ -141,25 +141,89 @@ html {
     font-size: 18px;
 }
 
-/* Explanation Section */
-.explanation-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    height: 100vh;
-    background-color: var(--color-bg-page);
+.power9-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 20px;
+    gap: 70px; 
+}
+
+.section-power9-title {
+    color: #f6feff; 
+    font-size: 2.3rem; 
+    font-weight: 700;
+    margin-bottom: 55px; 
+    text-align: left; 
+}
+
+
+.info-column {
+    flex: 1.1; 
+    min-width: 350px;
+    margin-top:50px;
+}
+
+.viz-column {
+    flex: 1.9; 
+    display: flex;
+    justify-content: flex-end;
+    min-height: 300px;
+    margin-bottom: 60px;
+}
+#power9-viz {
+    width: 100%;
+    height: 100%;
+}
+
+.dark-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px; 
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    height:auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-top:10px;
 }
 
-.explanation-container {
-    width: 50%;
-    padding: 20px;
+.accent-line-dynamic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: #a9d5db; 
+    transition: background-color 0.4s ease;
 }
 
-.explanation-container h2 {
-    padding-bottom: 10px;
+#card-title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    transition: color 0.4s ease; 
+    color: #a9d5db;
+}
+
+#card-text p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    flex-grow: 1;
+}
+
+.card-footer {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #64748b;
+    border-top: 1px solid #334155;
+    padding-top: 15px;
 }
 
 /* Our Approach section */
