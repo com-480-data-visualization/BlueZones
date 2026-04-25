@@ -4,8 +4,8 @@ const colorScale = d3.scaleSequential(d3.interpolateBlues)
     .domain([0, 1]); 
 
 const projection = d3.geoMercator()
-    .scale(130)
-    .translate([500, 280]); 
+    .scale(160)
+    .translate([500, 390]); 
 
 const pathGenerator = d3.geoPath().projection(projection);
 
