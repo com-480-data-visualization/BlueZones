@@ -314,6 +314,14 @@ html {
     padding-top: 90px;
 }
 
+.cards-subtitle {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 400;
+}
+
 .cards-globe-container {
     display: flex;
     flex-direction: column;
