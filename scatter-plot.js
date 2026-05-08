@@ -24,7 +24,7 @@ svgScatterPlot.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-    .domain([0, 100])
+    .domain([0, 1])
     .range([heightScatterPlot, 0]);
 
 svgScatterPlot.append("g")
@@ -49,62 +49,100 @@ var yAxis = svgScatterPlot.append("text")
 
 const scatterToolTip = d3.select("#scatter-tooltip");
 
-// Add dots
-svgScatterPlot.append('g')
-    .selectAll("dot")
-    .data(dataScatterPlot)
-    .enter()
-    .append("circle")
-    .attr("class", "data-point")
-    .attr("cx", function (d) { return x(d.x); })
-    .attr("cy", function (d) { return y(d.y); })
-    .attr("r", 5)
-    .style("fill", (c) => {
-            if (blueZonesCountries.includes(c.country)) {
+d3.json("data/blue-zone-index-scatter-plot.csv").then((blue_zone_data) => {
+
+    //console.log(blue_zone_data);
+
+    // Add dots
+    svgScatterPlot.append('g')
+        .selectAll("dot")
+        .data(blue_zone_data)
+        .enter()
+        .append("circle")
+        .attr("class", "data-point")
+        .attr("cx", function (d) { return x((d["Life expectancy"] == null) ? 0 : d["Life expectancy"]); })
+        .attr("cy", function (d) { return y((d["blue_zone_index"] == null) ? 0 : d["blue_zone_index"]); })
+        .attr("r", 5)
+        .attr("stroke", "#339dff")
+        .attr("stroke-width", 0.5)
+        .style("fill", (c) => {
+            //console.log(c);
+            if (blueZonesCountries.includes(c["country"])) {
                 return "#339dff";
             } else {
                 return "#ffffff";
             }
         })
-    .on("mouseover", function (event, d) {
-        d3.select(this)
-            .transition()
-            .duration(100)
-            .attr("r", 10);
+        .on("mouseover", function (event, d) {
+            //console.log(d);
+            d3.select(this)
+                .transition()
+                .duration(100)
+                .attr("r", 10);
 
-        scatterToolTip
-            .style("display", "block")
-            .style("left", (event.pageX + 15) + "px")
-            .style("top", (event.pageY + 15) + "px")
-            .html(`
-            <strong>${d.country}</strong><br/>
-            Life Expectancy: ${d.x}<br/>
-            Blue Zone Index: ${d.y}
+            scatterToolTip
+                .style("display", "block")
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY + 15) + "px")
+                .html(`
+            <strong>${d["country"]}</strong><br/>
+            Life Expectancy: ${((d["Life expectancy"] == null) ? 0 : d["Life expectancy"]).toFixed(2)}<br/>
+            ${radioYAxisMapping[currentButtonId]}: ${((d[radioMappingData[currentButtonId]] == null) ? 0 : d[radioMappingData[currentButtonId]]).toFixed(2)}
             `)
-    })
-    .on("mousemove", (event) => {
-        scatterToolTip
-            .style("left", (event.pageX + 15) + "px")
-            .style("top", (event.pageY + 15) + "px");
-    })
-    .on("mouseout", function () {
-        d3.select(this)
-            .transition()
-            .duration(100)
-            .attr("r", 5);
+        })
+        .on("mousemove", (event) => {
+            scatterToolTip
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY + 15) + "px");
+        })
+        .on("mouseout", function () {
+            d3.select(this)
+                .transition()
+                .duration(100)
+                .attr("r", 5);
 
-        scatterToolTip.style("display", "none");
+            scatterToolTip.style("display", "none");
+        });
+
+
+    const radioYAxisMapping = {
+        "idx": "Blue Zone Index",
+        "happy": "Happiness",
+        "activity": "Activity",
+        "wine": "Wine Consumption",
+        "food": "Food"
+    }
+
+    const radioMappingData = {
+        "idx": "blue_zone_index",
+        "happy": "Life evaluation",
+        "activity": "steps_mean_filtered",
+        "wine": "Wine Consumption",
+        "food": "Pulses"
+    };
+
+    let currentButtonId = "idx";
+
+    d3.selectAll("input[name='bz']").on("change.scatter-plot", function (event) {
+
+        currentButtonId = this.id;
+        // We change the name of the Y axis
+        yAxis.text(radioYAxisMapping[currentButtonId]);
+
+        d3.selectAll(".data-point")
+            .transition()
+            .duration(750)
+            .attr("cx", function (d) { return x((d["Life expectancy"] == null) ? 0 : d["Life expectancy"]); })
+            .attr("cy", function (d) { return y((d[radioMappingData[currentButtonId]] == null) ? 0 : d[radioMappingData[currentButtonId]]); })
+            .attr("r", 5)
+            .style("fill", (c) => {
+                if (blueZonesCountries.includes(c["country"])) {
+                    return "#339dff";
+                } else {
+                    return "#ffffff";
+                }
+            });
+            
     });
 
-
-const radioYAxisMapping = {
-    "idx": "Blue Zone Index",
-    "happy": "Happiness",
-    "activity": "Activity",
-    "wine": "Wine Consumption",
-    "food": "Food"
-}
-d3.selectAll("input[name='bz']").on("change.scatter-plot", function (event) {
-    // We change the name of the Y axis
-    yAxis.text(radioYAxisMapping[this.id]);
 });

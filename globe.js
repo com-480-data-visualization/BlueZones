@@ -4,7 +4,7 @@ async function initBlueZonesGlobe() {
 
     const width = container.clientWidth;
     const height = container.clientHeight;
-    const radius = Math.min(width, height) * 0.95;
+    const radius = Math.min(width, height) * 1.2;
     const blueZoneFocusCoordinates = {
         // Coordinates of blue zones
         "United States of America": [-117.24, 34.05], 
@@ -27,7 +27,7 @@ async function initBlueZonesGlobe() {
 
     const projection = d3
         .geoOrthographic()
-        .translate([width / 2, height / 2])
+        .translate([width / 2, height / 2.5])
         .scale(radius)
         .clipAngle(90);
 
