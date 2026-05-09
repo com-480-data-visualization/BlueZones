@@ -323,12 +323,13 @@ html {
 }
 
 .cards-globe-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 45% 55%;
     height: 100%;
     width: 100%;
-    padding-top: 24px;
+    padding-top: 5px;
     gap: 16px;
+    overflow: hidden;
 }
 
 .cards-container {
@@ -341,7 +342,7 @@ html {
 .blue-zone-card {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 100%;
     border-radius: 20px;
     perspective: 1000px;
     cursor: pointer;
@@ -439,9 +440,18 @@ html {
     z-index: 3;
 }
 
+.embla {
+    height: 100%;
+}
+
+.embla__viewport {
+    height: 100%;
+}
+
 .embla__container {
   display: flex;
   touch-action: pan-y pinch-zoom;
+  height: 100%;
 }
 
 .embla__slide {
@@ -449,12 +459,14 @@ html {
   min-width: 0;
 }
 
-#bluezones-globe {
+#globe-container {
     width: 100%;
     height: 100%;
 }
 
-#bluezones-globe svg {
+#bluezones-globe {
+    width: 100%;
+    height: 100%;
     overflow: visible;
     filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
 }

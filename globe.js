@@ -1,5 +1,5 @@
 async function initBlueZonesGlobe() {
-    const container = document.getElementById("bluezones-globe");
+    const container = document.getElementById("globe-container");
     if (!container) return;
 
     const width = container.clientWidth;
@@ -19,16 +19,16 @@ async function initBlueZonesGlobe() {
         .select(container)
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("id", "bluezones-globe")
 
     const svgTopOffset = parseFloat(window.getComputedStyle(svg.node()).top) || 0;
     const visibleCenterYOffset = -svgTopOffset;
-    const normalizedYOffset = Math.max(-0.85, Math.min(-0.5, -visibleCenterYOffset / radius));
+    const normalizedYOffset = Math.max(-0.85, Math.min(-0.75, -visibleCenterYOffset / radius));
     const latitudeBias = (Math.asin(normalizedYOffset) * 180) / Math.PI;
 
     const projection = d3
         .geoOrthographic()
-        //.translate([width / 2, height / 2.5])
-        .translate([width / 2, radius / 0.95])
+        .translate([width / 2, height / 0.8])
         .scale(radius)
         .clipAngle(90);
 
