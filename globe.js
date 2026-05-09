@@ -22,12 +22,13 @@ async function initBlueZonesGlobe() {
 
     const svgTopOffset = parseFloat(window.getComputedStyle(svg.node()).top) || 0;
     const visibleCenterYOffset = -svgTopOffset;
-    const normalizedYOffset = Math.max(-0.85, Math.min(0.85, -visibleCenterYOffset / radius));
+    const normalizedYOffset = Math.max(-0.85, Math.min(-0.5, -visibleCenterYOffset / radius));
     const latitudeBias = (Math.asin(normalizedYOffset) * 180) / Math.PI;
 
     const projection = d3
         .geoOrthographic()
-        .translate([width / 2, height / 2.5])
+        //.translate([width / 2, height / 2.5])
+        .translate([width / 2, radius / 0.95])
         .scale(radius)
         .clipAngle(90);
 
@@ -71,7 +72,7 @@ async function initBlueZonesGlobe() {
         if (!focusCoordinates) return;
 
         const [longitude, latitude] = focusCoordinates;
-        const target = [-longitude, -latitude + latitudeBias];
+        const target = [-longitude, -latitude - latitudeBias];
 
         const start = projection.rotate();
         const end = normalizeRotation(start, target);

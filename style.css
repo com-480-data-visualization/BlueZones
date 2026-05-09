@@ -455,8 +455,6 @@ html {
 }
 
 #bluezones-globe svg {
-    position: relative;
-    top: 300px;
     overflow: visible;
     filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
 }
