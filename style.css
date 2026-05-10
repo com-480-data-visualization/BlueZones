@@ -141,6 +141,19 @@ html {
     font-size: 18px;
 }
 
+.source-video {
+    position: absolute;
+    bottom: 0;
+    padding: 15px;
+    width: 100%;
+    color: white;
+    font-size: 12px;
+    opacity: 80%;
+}
+
+
+
+
 .power9-wrapper {
     display: flex;
     justify-content: space-between;
