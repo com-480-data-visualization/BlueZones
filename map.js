@@ -4,8 +4,8 @@ const colorScale = d3.scaleSequential(d3.interpolateBlues)
     .domain([0, 1]); 
 
 const projection = d3.geoMercator()
-    .scale(160)
-    .translate([500, 450]); 
+    .scale(115)
+    .translate([525, 295]); 
 
 const pathGenerator = d3.geoPath().projection(projection);
 
@@ -86,8 +86,8 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
             })
             .on("mousemove", (event) => {
                 d3.select("#radar-tooltip")
-                    .style("left", (event.pageX + 15) + "px")
-                    .style("top", (event.pageY + 15) + "px");
+                    .style("left", (event.clientX  + 15) + "px")
+                    .style("top", (event.clientY + 15) + "px");
             })
             .on("mouseout", function () {
                 d3.select(this)
@@ -96,6 +96,12 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
                     .attr("stroke-width", 0.5);
 
                 d3.select("#radar-tooltip").style("display", "none");
+            })
+            .on("click", function (event, d) {
+                const countryName = d.properties.name || d.properties.NAME;
+                if (typeof window.highlightCountryOnScatter === "function") {
+                    window.highlightCountryOnScatter(countryName);
+                }
             });
 
         const scales = {
