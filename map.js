@@ -14,7 +14,8 @@ const themeMapping = {
     "happy": "Life evaluation",
     "activity": "steps_mean_filtered",
     "wine": "Wine Consumption",
-    "food": "plant_based_ratio"
+    "plant-based": "plant_based_ratio",
+    "rule80":"rule80_score"
 };
 
 let activeMapData   = {};
@@ -65,7 +66,7 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
 
                     const radarData = [
                         { axis: "Plant-based diet", value: countryData ? (countryData["plant_based_ratio"] ?? 0) : 0 },
-                        { axis: "80% rule",          value: 0 },
+                        { axis: "80% rule",          value: countryData ? (countryData["rule80_score"] ?? 0) : 0 },
                         { axis: "Activity",          value: countryData ? (countryData["steps_mean_filtered"] ?? 0) : 0 },
                         { axis: "Happiness",         value: countryData ? (countryData["Life evaluation"] ?? 0) : 0 },
                         { axis: "Wine %",            value: countryData ? (countryData["Wine Consumption"] ?? 0) : 0 }
@@ -111,7 +112,8 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
             "happy":    d3.scaleSequential(d3.interpolateRdPu).domain([0, 1]),
             "activity": d3.scaleSequential(d3.interpolateOranges).domain([0, 1]),
             "wine":     d3.scaleSequential(d3.interpolateReds).domain([0, 1]),
-            "food":     d3.scaleSequential(d3.interpolateGreens).domain([0, 1])
+            "plant-based":     d3.scaleSequential(d3.interpolateGreens).domain([0, 1]),
+            "rule80":     d3.scaleSequential(d3.interpolatePurples).domain([0, 1])
         };
 
         function updateMapColors(theme) {
