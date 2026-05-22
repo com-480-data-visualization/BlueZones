@@ -1,5 +1,5 @@
 function drawRadar(data, countryName, selector) {
-    const width = 340;
+    const width = 290;
     const height = 260;
     const margin = 50;
     const radius = Math.min(width, height) / 2 - margin;
