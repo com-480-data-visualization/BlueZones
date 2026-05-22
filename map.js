@@ -4,8 +4,8 @@ const colorScale = d3.scaleSequential(d3.interpolateBlues)
     .domain([0, 1]);
 
 const projection = d3.geoMercator()
-    .scale(115)
-    .translate([525, 295]);
+    .scale(130)
+    .translate([525, 330]);
 
 const pathGenerator = d3.geoPath().projection(projection);
 
@@ -21,8 +21,8 @@ const themeMapping = {
 let activeMapData   = {};
 let mapCurrentYear  = "2023";
 
-function getCountryData(name) {
-    return activeMapData[name] || null;
+function getCountryData(id) {
+    return activeMapData[id] || null;
 }
 
 d3.json("data/countries-50m.json").then((topojson_raw) => {
@@ -40,7 +40,7 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
             .attr("class", "country")
             .attr("d", pathGenerator)
             .attr("fill", (c) => {
-                const data = getCountryData(c.properties.name);
+                const data = getCountryData(Number(c.id));
                 return colorScale(data ? (data["blue_zone_index"] ?? 0) : 0);
             })
             .attr("stroke", "#0f172a")
@@ -55,7 +55,7 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
                 const countryName = d.properties.name || d.properties.NAME;
                 const tooltip     = d3.select("#radar-tooltip");
                 const activeTheme = document.querySelector("input[name='bz']:checked").id;
-                const countryData       = getCountryData(countryName);
+                const countryData       = getCountryData(Number(d.id));
 
                 tooltip.style("display", "block").html("");
                 tooltip.style("left", (event.pageX + 15) + "px")
@@ -122,7 +122,7 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
                 .transition()
                 .duration(750)
                 .attr("fill", (c) => {
-                    const data = getCountryData(c.properties.name);
+                    const data = getCountryData(Number(c.id));
                     return currentScale(data ? (data[themeMapping[theme]] ?? 0) : 0);
                 });
         }

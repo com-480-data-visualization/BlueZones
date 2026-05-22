@@ -65,8 +65,8 @@ const radioYAxisMapping = {
     "happy":    "Happiness",
     "activity": "Activity",
     "wine":     "Wine Consumption",
-    "plant-based": "plant_based_ratio",
-    "rule80":"rule80_score"
+    "plant-based": "Plant-based ratio",
+    "rule80": "80% Rule"
 };
 
 const radioMappingData = {
@@ -75,7 +75,7 @@ const radioMappingData = {
     "activity": "steps_mean_filtered",
     "wine":     "Wine Consumption",
     "plant-based": "plant_based_ratio",
-    "rule80":"rule80_score"
+    "rule80": "rule80_score"
 };
 
 let currentButtonId    = "idx";
