@@ -91,18 +91,46 @@ function showScore() {
     nextBtn.hidden   = true;
 
     const pct = score / questions.length;
-    let desc;
+    let desc, badge;
     if (pct === 1) {
-        desc = 'Exceptional! You have deep knowledge of what makes people live longer lives!.';
+        desc  = 'Exceptional! You have deep knowledge of what makes people live longer lives!';
+        badge = 'Blue Zone Master';
     } else if (pct >= 0.6) {
-        desc = 'Great work! You understand the core principles of longevity.';
+        desc  = 'Great work! You understand the core principles of longevity.';
+        badge = 'On the Path';
     } else {
-        desc = "Keep studying! A little more effort and you'll be a longevity expert.";
+        desc  = "Keep studying! A little more effort and you'll be a longevity expert.";
+        badge = 'Just Getting Started';
     }
 
-    scoreCard.querySelector('.score-big').textContent    = `${score}/${questions.length}`;
-    scoreCard.querySelector('.level-desc').textContent    = desc;
+    const r = 54, circ = +(2 * Math.PI * r).toFixed(2);
+    const offset = +(circ * (1 - pct)).toFixed(2);
+
+    scoreCard.querySelector('.score-big').innerHTML = `
+        <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="quizGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#38bdf8"/>
+                    <stop offset="100%" stop-color="#34d399"/>
+                </linearGradient>
+            </defs>
+            <circle class="score-ring-track" cx="70" cy="70" r="${r}"/>
+            <circle class="score-ring-fill" cx="70" cy="70" r="${r}"
+                stroke-dasharray="${circ}" stroke-dashoffset="${circ}"/>
+        </svg>
+        <div class="score-fraction">
+            <span class="score-fraction-num">${score}/${questions.length}</span>
+            <span class="score-fraction-label">correct</span>
+        </div>`;
+
+    scoreCard.querySelector('.score-sub').textContent  = badge;
+    scoreCard.querySelector('.level-desc').textContent = desc;
     scoreCard.hidden = false;
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        const ring = scoreCard.querySelector('.score-ring-fill');
+        if (ring) ring.style.strokeDashoffset = offset;
+    }));
 }
 
 document.getElementById('btn-restart').addEventListener('click', () => {

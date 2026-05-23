@@ -11,4 +11,12 @@ cards.forEach((card) => {
       card.classList.toggle('is-flipped');
     }
   });
+
+  const src = card.querySelector('.blue-zone-card-image')?.src;
+  if (src) {
+    const blur = document.createElement('div');
+    blur.className = 'card-back-blur';
+    blur.style.backgroundImage = `url(${src})`;
+    card.querySelector('.blue-zone-card-back').prepend(blur);
+  }
 });
