@@ -165,6 +165,7 @@ d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
         .attr("cy", d => y(d["blue_zone_index"] ?? 0))
         .attr("r", 4.5)
         .style("fill", "#2dd4bf")
+        .style("stroke", "rgba(15, 23, 42, 0.5)")
         .style("opacity", 0.8)
         .on("mouseover", function (event, d) {
             const point = d3.select(this);
