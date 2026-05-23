@@ -143,11 +143,58 @@ html {
 }
 
 .landing-page-title h1 {
-    font-size: 48px;
+   font-size: 48px;
+   font-family: Georgia, 'Times New Roman', serif;
+   font-weight: normal;
+   letter-spacing: 0.02em;
 }
 
+
 .landing-page-title p {
-    font-size: 18px;
+   font-size: 18px;
+}
+
+
+.landing-stats {
+   position: absolute;
+   bottom: 60px;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   gap: 24px;
+   z-index: 1;
+}
+
+
+.landing-stat-box {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: white;
+   background: rgba(0, 0, 0, 0.35);
+   border: 1px solid rgba(255, 255, 255, 0.3);
+   border-radius: 8px;
+   padding: 20px 32px;
+   text-shadow: 0px 2px 8px rgba(0,0,0,0.5);
+   min-width: 160px;
+}
+
+
+.stat-number {
+   font-size: 40px;
+   font-family: Georgia, 'Times New Roman', serif;
+   font-weight: bold;
+   line-height: 1;
+}
+
+
+.stat-label {
+   font-size: 14px;
+   margin-top: 6px;
+   text-align: center;
+   opacity: 0.9;
+   text-transform: uppercase;
+   letter-spacing: 0.08em;
 }
 
 .landing-page-section::after {
@@ -809,8 +856,9 @@ html {
 }
 
 .cards-globe-title {
-    font-size: 28px;
+    font-size: 2.8rem;
     color: var(--color-title);
+    font-weight: 800;
     padding-top: 90px;
 }
 
@@ -846,9 +894,8 @@ html {
     border-radius: 20px;
     perspective: 1000px;
     cursor: pointer;
-    border: 1px solid var(--color-border);
     box-shadow: var(--shadow-card);
-    background: var(--color-card);
+    background: transparent;
 }
 
 .blue-zone-card-inner {
@@ -882,7 +929,7 @@ html {
 
 .blue-zone-card-back {
     transform: rotateY(180deg);
-    background: var(--gradient-card-back);
+    background: transparent;
     color: var(--color-text);
     padding: 16px 18px;
     display: flex;
@@ -890,6 +937,29 @@ html {
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
+}
+
+.card-back-blur {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    transform: scale(-1.1, 1.1);
+    z-index: 0;
+}
+
+.blue-zone-card-back::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.52);
+    z-index: 1;
+}
+
+.blue-zone-card-back > *:not(.card-back-blur) {
+    position: relative;
+    z-index: 2;
 }
 
 .blue-zone-card-back ul {
@@ -904,8 +974,9 @@ html {
     position: relative;
     padding: 8px 10px 8px 30px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 8px 18px rgba(27, 42, 74, 0.08);
+    background: rgba(10, 15, 30, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #f1f5f9;
 }
 
 .blue-zone-card-back li::before {
@@ -938,6 +1009,15 @@ html {
     color: var(--color-white);
     text-shadow: 0 1px 4px var(--color-black-35);
     z-index: 3;
+}
+
+.fun-facts-title {
+    color: var(--color-white);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+    text-shadow: 0 2px 8px var(--color-black-45);
 }
 
 .embla {
@@ -1440,9 +1520,10 @@ transform: translateX(-45px) !important;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2.2rem !important;
-    margin-bottom: 0.5rem !important;
-    font-weight: 600;
+    font-size: 2.8rem;
+    color: #fff;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
     text-align: center;
 }
 
@@ -1630,38 +1711,108 @@ transform: translateX(-45px) !important;
 }
 
 
-.btn-restart:hover {
-    background: #263348;
-}
-
-
 .score-card {
-    background-color: #1e293b;
-    border: 1px solid #334155;
-    padding: 2rem;
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2.5rem;
     text-align: center;
-    border-radius: 12px;
+    border-radius: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .score-big {
-    font-size: 48px;
-    font-weight: 700;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1rem;
+}
+
+.score-big svg {
+    width: 140px;
+    height: 140px;
+    transform: rotate(-90deg);
+}
+
+.score-ring-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.06);
+    stroke-width: 8;
+}
+
+.score-ring-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke: url(#quizGrad);
+    transition: stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.score-fraction {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-fraction-num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
     line-height: 1;
-    margin-bottom: 0.3rem;
-    color: var(--color-white);
+}
+
+.score-fraction-label {
+    font-size: 0.6rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 3px;
 }
 
 .score-sub {
-    font-size: 13px;
-    color: var(--color-title);
-    margin-bottom: 1rem;
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    color: #38bdf8;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.75rem;
 }
 
 .level-desc {
-    font-size: 14px;
+    font-size: 0.95rem;
     color: #94a3b8;
     line-height: 1.5;
     margin: 0 auto 1.25rem;
+    max-width: 400px;
+}
+
+.btn-restart {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    padding: 10px 28px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-restart:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: #38bdf8;
+    color: #38bdf8;
 }
 
 /* --- Footer Section --- */
