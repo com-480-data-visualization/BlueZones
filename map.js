@@ -19,8 +19,9 @@ function smartPositionTooltip(node, clientX, clientY) {
 }
 
 const projection = d3.geoMercator()
-    .scale(155) 
-    .translate([405, 390]); 
+    .scale(150) 
+    .translate([480, 390])
+    .rotate([-11, 0]);
 
 const pathGenerator = d3.geoPath().projection(projection);
 
