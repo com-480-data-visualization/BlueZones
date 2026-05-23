@@ -1,5 +1,3 @@
-// Code inspired from https://d3-graph-gallery.com/graph/scatter_basic.html and https://d3-graph-gallery.com/graph/custom_theme.html
-
 const blueZonesCountries = ["Japan", "Greece", "Italy", "Costa Rica", "United States of America"];
 
 const drawer    = document.getElementById('scatter-panel');
@@ -9,64 +7,64 @@ const mapCard   = document.querySelector('.map-card');
 toggleBtn.addEventListener('click', () => {
     const isOpen = drawer.classList.toggle('is-open');
     mapCard.classList.toggle('is-shrunk');
-    toggleBtn.innerText = isOpen ? "▶" : "◀";
+    toggleBtn.innerText = isOpen ? "❯" : "❮";
 });
 
-const margin             = {top: 40, right: 60, bottom: 70, left: 70};
-const widthScatterPlot   = 400 - margin.left - margin.right;
-const heightScatterPlot  = 400 - margin.top  - margin.bottom;
+const margin             = {top: 30, right: 30, bottom: 50, left: 55};
+const widthScatterPlot   = 420 - margin.left - margin.right;
+const heightScatterPlot  = 380 - margin.top  - margin.bottom;
 
 var svgScatterPlot = d3.select("#scatter-plot")
-    .attr("width",  widthScatterPlot  + margin.left + margin.right)
-    .attr("height", heightScatterPlot + margin.top  + margin.bottom)
+    .attr("viewBox", `0 0 ${widthScatterPlot + margin.left + margin.right} ${heightScatterPlot + margin.top + margin.bottom}`)
+    .attr("preserveAspectRatio", "xMidYMid meet")
     .append("g")
-    .style("fill", "white")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// X axis — Life Expectancy (raw years, fixed domain)
-var x = d3.scaleLinear()
-    .domain([0, 100])
-    .range([0, widthScatterPlot]);
+var x = d3.scaleLinear().domain([0, 100]).range([0, widthScatterPlot]);
 
 svgScatterPlot.append("g")
     .attr("transform", "translate(0," + heightScatterPlot + ")")
-    .call(d3.axisBottom(x));
+    .call(d3.axisBottom(x).ticks(5))
+    .attr("color", "#64748b");
 
-// Y axis — dynamic
-var y = d3.scaleLinear()
-    .domain([0, 1])
-    .range([heightScatterPlot, 0]);
-
+var y = d3.scaleLinear().domain([0, 1]).range([heightScatterPlot, 0]);
 svgScatterPlot.append("g")
     .attr("class", "y-axis")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y).ticks(5))
+    .attr("color", "#64748b");
+
+svgScatterPlot.append("g").attr("class", "grid")
+    .attr("transform", "translate(0," + heightScatterPlot + ")")
+    .call(d3.axisBottom(x).ticks(5).tickSize(-heightScatterPlot).tickFormat("")).attr("color", "rgba(255,255,255,0.04)");
+svgScatterPlot.append("g").attr("class", "grid")
+    .call(d3.axisLeft(y).ticks(5).tickSize(-widthScatterPlot).tickFormat("")).attr("color", "rgba(255,255,255,0.04)");
 
 svgScatterPlot.append("text")
     .attr("text-anchor", "middle")
     .attr("x", widthScatterPlot / 2)
-    .attr("y", heightScatterPlot + margin.top + 50)
-    .attr("fill", "white")
-    .attr("font-size", "16px")
+    .attr("y", heightScatterPlot + 40)
+    .attr("fill", "#94a3b8")
+    .attr("font-size", "12px")
     .text("Life Expectancy");
 
 var yAxis = svgScatterPlot.append("text")
     .attr("text-anchor", "middle")
     .attr("transform", "rotate(-90)")
-    .attr("y", -margin.left + 20)
+    .attr("y", -40)
     .attr("x", -heightScatterPlot / 2)
-    .attr("fill", "white")
-    .attr("font-size", "16px")
-    .text("Blue Zone Index");
+    .attr("fill", "#94a3b8")
+    .attr("font-size", "12px")
+    .text("Index Score");
 
 const scatterToolTip = d3.select("#scatter-tooltip");
 
 const radioYAxisMapping = {
-    "idx":      "Blue Zone Index",
+    "idx":      "Index Score",
     "happy":    "Happiness",
     "activity": "Activity",
-    "wine":     "Wine Consumption",
-    "plant-based": "plant_based_ratio",
-    "rule80":"rule80_score"
+    "wine":     "Wine",
+    "plant-based": "Plant Slant",
+    "rule80":   "80% Rule"
 };
 
 const radioMappingData = {
@@ -75,7 +73,7 @@ const radioMappingData = {
     "activity": "steps_mean_filtered",
     "wine":     "Wine Consumption",
     "plant-based": "plant_based_ratio",
-    "rule80":"rule80_score"
+    "rule80":   "rule80_score"
 };
 
 let currentButtonId    = "idx";
@@ -87,45 +85,36 @@ function getCurrentScatterData() {
     return allYearScatterData[scatterCurrentYear] || [];
 }
 
+const dotScales = {
+    "idx":          d3.interpolateBlues,
+    "happy":        d3.interpolateRdPu,
+    "activity":     d3.interpolateOranges,
+    "wine":         d3.interpolateReds,
+    "plant-based":  d3.interpolateGreens,
+    "rule80":       d3.interpolatePurples
+};
+
 function refreshDotColors() {
+    const activeThemeId = document.querySelector("input[name='bz']:checked")?.id || "idx";
+    const activeScale   = dotScales[activeThemeId] || d3.interpolateBlues;
+    const dataKey       = radioMappingData[activeThemeId];
+
+    const currentData = getCurrentScatterData();
+    const maxVal = d3.max(currentData, d => parseFloat(d[dataKey]) || 1) || 1;
+
     d3.selectAll(".data-point")
+        .transition("colorTrans") 
+        .duration(400)
         .style("fill", function (d) {
-            if (d["country"] === selectedCountry) return "#ff6b35";
-            if (blueZonesCountries.includes(d["country"])) return "#339dff";
-            return "#ffffff";
+            if (d["country"] === selectedCountry) return "#ffffff"; 
+            const rawVal = parseFloat(d[dataKey]) || 0;
+            const normalized = maxVal > 0 ? (rawVal / maxVal) : 0;
+            return d3.quantize(activeScale, 10)[Math.floor(normalized * 7) + 2] || "#38bdf8";
         })
-        .attr("stroke", function (d) {
-            return (d["country"] === selectedCountry) ? "#ff6b35" : "#339dff";
-        })
-        .attr("stroke-width", function (d) {
-            return (d["country"] === selectedCountry) ? 2 : 0.5;
-        })
-        .attr("r", function (d) {
-            return (d["country"] === selectedCountry) ? 8 : 5;
-        });
-
-    d3.selectAll(".selected-country-label").remove();
-    if (selectedCountry){
-        const selectedDot= d3.selectAll(".data-point")
-            .filter(d => d["country"] === selectedCountry)
-            .node();
-        if (selectedDot){
-            const cx = parseFloat(d3.select(selectedDot).attr("cx"));
-            const cy = parseFloat(d3.select(selectedDot).attr("cy"));
-
-            d3.select(selectedDot.parentNode)
-                .append("text")
-                .attr("class", "selected-country-label") 
-                .attr("x", cx)
-                .attr("y", cy - 15) 
-                .attr("text-anchor", "middle") 
-                .attr("fill", "#ff6b35") 
-                .attr("font-size", "14px")
-                .attr("font-weight", "bold")
-                .style("pointer-events", "none") 
-                .text(selectedCountry);
-        }
-    }
+        .style("opacity", d => (d["country"] === selectedCountry) ? 1 : 0.8)
+        .style("stroke", d => (d["country"] === selectedCountry) ? "#2dd4bf" : "rgba(15, 23, 42, 0.5)")
+        .style("stroke-width", d => (d["country"] === selectedCountry) ? 2 : 0.5)
+        .attr("r", d => (d["country"] === selectedCountry) ? 7 : 4.5);
 }
 
 window.highlightCountryOnScatter = function (countryName) {
@@ -140,8 +129,9 @@ function updateYDomain(data, dataKey) {
     }) || 1;
     y.domain([0, maxVal]);
     svgScatterPlot.select(".y-axis")
-        .transition().duration(500)
-        .call(d3.axisLeft(y));
+        .transition("axisTrans")
+        .duration(500)
+        .call(d3.axisLeft(y).ticks(5));
 }
 
 function updateScatterForYear(year) {
@@ -153,8 +143,8 @@ function updateScatterForYear(year) {
 
     svgScatterPlot.selectAll(".data-point")
         .data(data, d => d["country"])
-        .transition()
-        .duration(500)
+        .transition("positionTrans") 
+        .duration(600)
         .attr("cx", d => x(d["Life expectancy"] ?? 0))
         .attr("cy", d => y(d[dataKey] ?? 0));
 
@@ -162,7 +152,6 @@ function updateScatterForYear(year) {
 }
 
 d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
-
     allYearScatterData = yearData;
     const initialData  = getCurrentScatterData();
 
@@ -174,35 +163,42 @@ d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
         .attr("class", "data-point")
         .attr("cx", d => x(d["Life expectancy"] ?? 0))
         .attr("cy", d => y(d["blue_zone_index"] ?? 0))
-        .attr("r", 5)
-        .attr("stroke", "#339dff")
-        .attr("stroke-width", 0.5)
-        .style("fill", d => blueZonesCountries.includes(d["country"]) ? "#339dff" : "#ffffff")
+        .attr("r", 4.5)
+        .style("fill", "#2dd4bf")
+        .style("opacity", 0.8)
         .on("mouseover", function (event, d) {
-            d3.select(this).transition().duration(100).attr("r", 10);
+            const point = d3.select(this);
+            const currentColor = point.style("fill");
+            point.attr("data-orig-color", currentColor); 
+
+            point.transition().duration(100).attr("r", 8).style("fill", "#fff").style("opacity", 1);
+            
             scatterToolTip
                 .style("display", "block")
                 .style("position", "fixed")
                 .style("left", (event.clientX + 15) + "px")
                 .style("top",  (event.clientY + 15) + "px")
                 .html(`
-                    <strong>${d["country"]}</strong><br/>
-                    Life Expectancy: ${(d["Life expectancy"] ?? 0).toFixed(2)}<br/>
-                    ${radioYAxisMapping[currentButtonId]}: ${(d[radioMappingData[currentButtonId]] ?? 0).toFixed(2)}
+                    <div style="font-weight: bold; margin-bottom:4px;">${d["country"]}</div>
+                    <div style="font-size:12px; color:#cbd5e1;">Life Exp: ${(d["Life expectancy"] ?? 0).toFixed(1)}</div>
+                    <div style="font-size:12px; color:#2dd4bf;">${radioYAxisMapping[currentButtonId]}: ${(d[radioMappingData[currentButtonId]] ?? 0).toFixed(2)}</div>
                 `);
         })
         .on("mousemove", (event) => {
-            scatterToolTip
-                .style("left", (event.clientX + 15) + "px")
-                .style("top",  (event.clientY + 15) + "px");
+            scatterToolTip.style("left", (event.clientX + 15) + "px").style("top",  (event.clientY + 15) + "px");
         })
         .on("mouseout", function (event, d) {
-            d3.select(this).transition().duration(100)
-                .attr("r", d["country"] === selectedCountry ? 8 : 5);
+            const point = d3.select(this);
+            const origColor = point.attr("data-orig-color") || "#2dd4bf";
+
+            point.transition().duration(100)
+                .attr("r", d["country"] === selectedCountry ? 7 : 4.5)
+                .style("fill", d["country"] === selectedCountry ? "#fff" : origColor) 
+                .style("opacity", d["country"] === selectedCountry ? 1 : 0.8);
+            
             scatterToolTip.style("display", "none");
         });
 
-    // Radio button changes
     d3.selectAll("input[name='bz']").on("change.scatter-plot", function (event) {
         currentButtonId  = event.target.id;
         const data       = getCurrentScatterData();
@@ -212,15 +208,31 @@ d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
         updateYDomain(data, dataKey);
 
         d3.selectAll(".data-point")
-            .transition().duration(750)
+            .transition("positionTrans") 
+            .duration(750)
             .attr("cx", d => x(d["Life expectancy"] ?? 0))
-            .attr("cy", d => y(d[dataKey] ?? 0))
-            .attr("r", 5);
+            .attr("cy", d => y(d[dataKey] ?? 0));
 
         refreshDotColors();
     });
 
-    // Year slider changes (dispatched by map.js)
+    document.addEventListener("themeChange", function (e) {
+        currentButtonId = e.detail.theme; 
+        const data       = getCurrentScatterData();
+        const dataKey    = radioMappingData[currentButtonId];
+
+        yAxis.text(radioYAxisMapping[currentButtonId]);
+        updateYDomain(data, dataKey);
+
+        d3.selectAll(".data-point")
+            .transition("positionTrans") 
+            .duration(750)
+            .attr("cx", d => x(d["Life expectancy"] ?? 0))
+            .attr("cy", d => y(d[dataKey] ?? 0));
+
+        refreshDotColors();
+    });
+
     document.addEventListener("yearChange", function (e) {
         updateScatterForYear(e.detail.year);
     });

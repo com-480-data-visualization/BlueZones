@@ -29,7 +29,6 @@
             </nav>
     </header>
 
-    <!-- Landing Page Section -->
     <section id="landing" class="landing-page-section">
 
         <video loop autoplay muted playsinline class="landing-page-video">
@@ -46,33 +45,45 @@
         </div>
     </section>
 
-    <!-- Explanation Section -->
-    <section id="about" class="power9-wrapper">
-        <div class="info-column">
-            <h2 class="section-power9-title">Discover Blue Zones</h2>
-            <div id="power9-card" class="card dark-card">
+    <!-- Landing / Home Section -->
+    <section id="bz-intro" class="bz-intro-section">
+        <span id="about"></span>
+
+        <div class="bz-intro-left">
+            <h1 class="bz-intro-title">Discover<br>Blue Zones</h1>
+            <p class="bz-intro-description">
+                Blue Zones are regions where people naturally live longer and healthier lives,
+                shaped by social networks, family, and community connections.
+            </p>
+            <a href="#cards" class="connect-btn">
+                Blue Zones
+                
+                <span class="btn-icon-placeholder">👥</span>
+            </a>
+
+            <div id="power9-card" class="card dark-card bz-info-card">
                 <div id="card-accent" class="accent-line-dynamic"></div>
-                
-                <h2 id="card-title">Facts and Habits</h2>
-                
-                <div id="card-text" class="text-content"> 
-                    <p>
-                    Blue Zones are five geographic regions where people tend to live significantly longer and 
-                    healthier lives than the global average. Researchers studying these areas 
-                    identified nine lifestyle principles (often referred to as the Blue Zone “Power 9”) that appear 
-                    to contribute to this exceptional longevity.
-                    <strong>Click on a bubble to learn more about them.</strong>
-                    </p></div>
-                
+                <div id="card-text" class="text-content">
+                    <p>Blue Zones are five geographic regions where people live significantly
+                    longer and healthier lives. Researchers identified nine key lifestyle
+                    principles — the "Power 9". <strong>Click a bubble to learn more.</strong></p>
+                </div>
                 <div class="card-footer">
-                    <em>Source : <a href="https://www.bluezones.com/2016/11/power-9/" target="_blank" style="color:#64748b;">Power 9® - Blue Zones</a></em>
+                    <em>Source: <a href="https://www.bluezones.com/2016/11/power-9/" target="_blank"
+                        class="card-source-link">Power 9 - Blue Zones</a></em>
                 </div>
             </div>
         </div>
 
-        <div class="viz-column">
+        <div class="bz-intro-right">
             <div id="power9-viz"></div>
         </div>
+
+        <a href="#cards" class="learn-more-btn">
+            <span class="pulse-ring"></span>
+            <span class="pulse-ring pulse-ring--delay"></span>
+            Learn More
+        </a>
     </section>
 
 
@@ -118,7 +129,7 @@
                                             <li>Goats roam everywhere and outperform people.</li>
                                             <li>Less tourism comparing to other Greek islands.</li>
                                             <li>Strong Greek Orthodox traditions shape community life.</li>
-                                            <li>Traditional “panigiria” (village festivals) are central to life.</li>
+                                            <li>Traditional "panigiria" (village festivals) are central to life.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -136,8 +147,8 @@
                                         <ul>
                                             <li>It is the second largest island in the Mediterranean after Sicily.</li>
                                             <li>They have a distinct language (Sardinian).</li>
-                                            <li>It has one of Europe’s deepest caves.</li>
-                                            <li>Sardinia’s coastline measures around 1850km long.</li>
+                                            <li>It has one of Europe's deepest caves.</li>
+                                            <li>Sardinia's coastline measures around 1850km long.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -194,104 +205,208 @@
     </div>
     </section>
 
-    <section id="why" class="approach-section">
-    <div class="approach-container">
-        <div class="card text-card">
-            <div class="accent-line"></div> 
-            
-            <h2>Our Approach</h2>
-            
-            <p class="lead-text">
-                What is the goal of this website?
-            </p>
-            
-            <div class="text-content">
-                <p>
-                    In a society obsessed with finding unnatural ways to extend life, Blue Zones stand out as geographical anomalies where people naturally attain extraordinary longevity. While the nine pillars explain <em>how</em> these centenarians live, we asked ourselves a broader question: are these optimal conditions met in other places around the world?
-                </p>
-                
-                <blockquote class="highlight-quote">
-                    "We decided to create a <strong>Blue Zone Index</strong> to identify <strong><span style="color: turquoise;">Turquoise Countries</span></strong>, places that closely mirror these longevity conditions."
-                </blockquote>
-                
-                <p>
-                    Translating qualitative lifestyle habits into global quantitative data is a complex challenge. Among the 9 original pillars, we isolated 5 key indicators that have reliable, measurable data worldwide. 
-                </p>
-
-                <p>
-                    When direct measurements were impossible, we carefully selected statistical proxies. For instance, the pillar of "downshifting" (stress reduction) has been modeled using national happiness levels, allowing us to accurately map this crucial mindset across the globe.
-                </p>
-            </div>
-        </div>
+    <section class="human-story-banner">
+        <div class="banner-content">
+            <blockquote>
+                "Life is short. Don’t run so fast you miss it."
+            </blockquote>
+            <cite>— Dan Buettner</cite>
         </div>
     </section>
+
+    <div class="approach-flow">
+                
+                <div class="glass-card animate-on-scroll delay-1">
+                    <h3 class="card-title-modern">1. The Beginning of Everything</h3>
+                    <div class="text-content">
+                        <p>We were fascinated by these 5 geographical anomalies. But a burning question kept us awake: do we really need to move to Okinawa or Sardinia to reach 100?</p>
+                        <p>Or can we recreate this magic right where we are?</p>
+                    </div>
+                </div>
+
+                <div class="flow-arrow animate-on-scroll delay-2">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <div class="glass-card highlight-glow animate-on-scroll delay-3">
+                    <h3 class="card-title-modern">2. The Secret Formula</h3>
+                    <div class="text-content">
+                        <p class="highlight-quote-modern">
+                            "Translating human habits into hard data."
+                        </p>
+                        <p class="sub-text-explanation">
+                            The obstacle? There is no global database for "having a good group of friends". 
+                        </p>
+                        
+                        <div class="funnel-visual">
+                            <div class="funnel-top">9 Qualitative Habits</div>
+                            <div class="funnel-arrow">▼ Data Translation ▼</div>
+                            <div class="funnel-bottom">5 Measurable Pillars</div>
+                        </div>
+                        
+                        <p class="sub-text-explanation" style="margin-top: 15px;">
+                            So we did lots of research with open-source global data to find reliable, comparable metrics.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flow-arrow animate-on-scroll delay-4">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <div class="glass-card animate-on-scroll delay-5">
+                    <h3 class="card-title-modern">3. The 5 Ingredients</h3>
+                    <p class="text-muted-modern">We finally isolated these 5 key metrics to scan the globe:</p>
+                    
+                    <div class="modern-list">
+                        <div class="list-item" style="--badge-color: #34d399">
+                            <span class="badge">🏃</span>
+                            <div class="item-content">
+                                <h3>Natural Movement</h3>
+                                <p>Daily physical activity & metabolism.</p>
+                            </div>
+                        </div>
+                        <div class="list-item" style="--badge-color: #38bdf8">
+                            <span class="badge">🥦</span>
+                            <div class="item-content">
+                                <h3>Eating like a Peasant</h3>
+                                <p>Availability of rich, plant-based diets.</p>
+                            </div>
+                        </div>
+                        <div class="list-item" style="--badge-color: #fbbf24">
+                            <span class="badge">🧘</span>
+                            <div class="item-content">
+                                <h3>Taking the Time</h3>
+                                <p>Stress management & overall happiness.</p>
+                            </div>
+                        </div>
+                        <div class="list-item" style="--badge-color: #f87171">
+                            <span class="badge">👵</span>
+                            <div class="item-content">
+                                <h3>Family Foundation</h3>
+                                <p>Stability of core family structures.</p>
+                            </div>
+                        </div>
+                        <div class="list-item" style="--badge-color: #c084fc">
+                            <span class="badge">🤝</span>
+                            <div class="item-content">
+                                <h3>A Solid Circle</h3>
+                                <p>Social connectivity and community support.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
+            <div class="map-transition animate-on-scroll delay-5">
+                <p>Now that you know the ingredients, it's time to explore.</p>
+                <h4>Does your country have the potential to become the 6th Blue Zone?</h4>
+                
+                <div class="index-explanation">
+                    <p>To find out, we created a custom <strong>Blue Zone Index</strong>. <br>The bluer a country appears on the map, the closer its lifestyle matches the centenarians.</p>
+                    <div class="legend-scale-container">
+                        <span class="scale-label">Standard</span>
+                        <div class="gradient-bar-preview"></div>
+                        <span class="scale-label-highlight">Blue Zone Potential</span>
+                    </div>
+                </div>
+
+                <a href="#map" class="explore-scroll-btn">Let's find out ↓</a>
+            </div>
+
+        </div> </section>
 
     <!-- Map Section -->
     <section id="map" class="map-section">
-        <div class="dashboard-wrapper">
+    <div class="map-header">
+        <h2>Explore the World</h2>
+    </div>
+    
+    
+    <div class="dashboard-wrapper">
 
-            <div class="card map-card">
-                <h2 class="card-title">Geographical Comparison</h2>
-                <div class="svg-container">
-                    <svg id="map-plot" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet"></svg>
-                    <div class="controls-overlay">
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="bz" id="idx" checked>
-                                <label for="idx">Blue Zone Index</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="bz" id="happy">
-                                <label for="happy">Happiness</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="bz" id="activity">
-                                <label for="activity">Activity</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="bz" id="wine">
-                                <label for="wine">Wine Consumption</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="bz" id="plant-based">
-                                <label for="food">Plant-based diet</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="bz" id="rule80">
-                                <label for="food">80% Rule</label>
-                            </div>
-                        </div>
+        <div class="card map-card">
+            
+            <div class="map-controls">
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="bz" id="idx" checked>
+                        <label for="idx">Index Score</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="bz" id="happy">
+                        <label for="happy">Happiness</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="bz" id="activity">
+                        <label for="activity">Activity</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="bz" id="wine">
+                        <label for="wine">Wine</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="bz" id="plant-based">
+                        <label for="plant-based">Plant Slant</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="bz" id="rule80">
+                        <label for="rule80">80% Rule</label>
+                    </div>
+                </div>
 
-                        <div class="year-slider-group">
-                            <div class="year-label">
-                                Year: <span id="year-display">2023</span>
-                            </div>
-                            <input type="range" id="year-slider"
-                                   min="1965" max="2024" value="2023" step="1">
-                            <div class="year-ticks">
-                                <span id ="slider-min-label">1965</span>
-                                <span id ="slider-max-label">2024</span>
-                            </div>
-                        </div>
+                <div class="year-slider-group">
+                    <div class="year-label">
+                        Year: <span id="year-display">2023</span>
+                    </div>
+                    <input type="range" id="year-slider"
+                           min="1965" max="2024" value="2023" step="1">
+                    <div class="year-ticks">
+                        <span id ="slider-min-label">1965</span>
+                        <span id ="slider-max-label">2024</span>
                     </div>
                 </div>
             </div>
 
-            <div class="tooltip" id="radar-tooltip"></div>
-            <div class="tooltip" id="scatter-tooltip"></div>
-
-            <div id="scatter-panel" class="side-drawer">
-                <button id="drawer-toggle" class="drawer-arrow">◀</button>
-                <div class="drawer-content">
-                    <h3 class="drawer-title">Correlation Analysis</h3>
-                    <div class="scatter-plot-container">
-                        <svg id="scatter-plot"></svg>
-                    </div>
-                </div>
+            <div class="svg-container">
+                <svg id="map-plot" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet"></svg>
             </div>
-
+            
         </div>
-    </section>
+
+        <div class="tooltip" id="radar-tooltip"></div>
+        <div class="tooltip" id="scatter-tooltip"></div>
+
+        <div id="scatter-panel" class="side-drawer">
+            <button id="drawer-toggle" class="drawer-arrow">❮</button>
+            <div class="drawer-content">
+                <h3 class="drawer-title">Correlation Model</h3>
+                <div class="drawer-subtitle">
+                    <div class="stat"><span>Facts</span><br><small>Selected Metric</small></div>
+                    <div class="stat"><span>Target</span><br><small>Life Expectancy</small></div>
+                </div>
+                <div class="scatter-plot-container">
+                    <svg id="scatter-plot"></svg>
+                </div>
+                <p class="drawer-desc">The scatter plot visualizes the correlation between the selected metric and life expectancy globally.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+ <div class="verdict-section animate-on-scroll">
+        <div class="glass-card winner-card">
+            <span class="winner-badge">Data Verdict</span>
+            <h2>The Next Blue Zone: <span class="winner-name">Switzerland</span></h2>
+            <p>Based on our global index, this nation shows the strongest correlation with centenarian lifestyles. </p>
+        </div>
+    </div>
+    
 
     
 
@@ -323,6 +438,8 @@
             </div>
         </div>
 
+    </section>
+    
         <footer class="site-footer">
             <div class="footer-content">
                 <div class="team-names">
@@ -334,8 +451,6 @@
                 </div>
             </div>
         </footer>
-
-    </section>
 
     <script src="cards.js"></script>
     <!-- <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>

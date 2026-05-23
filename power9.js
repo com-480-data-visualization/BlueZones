@@ -36,26 +36,25 @@ const height = 500;
 const svg = d3.select("#power9-viz")
     .append("svg")
     .attr("viewBox", [0, 0, width, height])
-    .attr("style", "max-width: 100%; height: auto;");
+    .attr("style", "max-width: 100%; height: auto; overflow: visible;"); 
 
 const color = d3.scaleOrdinal()
     .domain([0, 1, 2, 3, 4])
-    .range(["#60a5fa", "#86efac", "#fde047", "#a855f7", "#fdba74"]); 
+    .range(["#7dd3fc", "#a7f3d0", "#fef08a", "#e9d5ff", "#fed7aa"]); 
 
 const root = d3.hierarchy(data);
 const links = root.links();
 const nodes = root.descendants();
 
 const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.data.id).distance(45))
-    .force("charge", d3.forceManyBody().strength(-500)) 
+    .force("link", d3.forceLink(links).id(d => d.data.id).distance(50))
+    .force("charge", d3.forceManyBody().strength(-400)) 
     .force("center", d3.forceCenter(width / 2, height / 2)) 
-    .force("collide", d3.forceCollide().radius(d => d.data.radius + 5).iterations(2)); 
+    .force("collide", d3.forceCollide().radius(d => d.data.radius + 12)); 
 
 const link = svg.append("g")
-    .attr("stroke", "#ffffff")
-    .attr("stroke-opacity", 0.8)
-    .attr("stroke-width", 2)
+    .attr("stroke", "rgba(255, 255, 255, 0.15)")
+    .attr("stroke-width", 1.5)
     .selectAll("line")
     .data(links)
     .join("line");
@@ -70,15 +69,15 @@ node.append("circle")
     .attr("r", d => d.data.radius)
     .attr("fill", d => color(d.data.group))
     .attr("stroke", "#0f172a")
-    .attr("stroke-width", 2)
+    .attr("stroke-width", 1.5)
     .style("cursor", "pointer");
 
 node.append("text")
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle")
-    .style("fill", d => d.data.group === 0 || d.data.group === 3 ? "#ffffff" : "#0f172a")
-    .style("font-size", d => d.depth === 0 ? "15px" : "9.5px")
-    .style("font-weight", "bold")
+    .style("fill", "#0f172a") 
+    .style("font-size", d => d.depth === 0 ? "13px" : "10px")
+    .style("font-weight", "600")
     .style("pointer-events", "none")
     .each(function(d) {
         const lines = d.data.id.split('\n');
@@ -92,24 +91,45 @@ node.append("text")
 
 node.on("click", function(event, d) {
     const nodeColor = color(d.data.group);
-    
-    const title = d.data.id.replace('\n', ' '); 
-    const desc = d.data.desc || "Click on connected bubbles to learn more.";
+    const title = d.data.id.replace('\n', ' ');
+    const desc = d.data.desc || "Click on connected bubbles to explore details.";
 
-    const cardTitle = document.getElementById("card-title");
-    const cardText = document.querySelector("#card-text p");
+    const card = document.getElementById("power9-card");
+    const cardTextContainer = document.getElementById("card-text");
     const cardAccent = document.getElementById("card-accent");
 
-    cardTitle.innerText = title;
-    cardText.innerText = desc;
-    cardTitle.style.color = nodeColor;
+    cardTextContainer.innerHTML = `
+        <h2 style="color: ${nodeColor}; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; transition: color 0.3s ease;">
+            ${title}
+        </h2>
+        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+            ${desc}
+        </p>
+    `; 
+    
     cardAccent.style.backgroundColor = nodeColor;
+    card.style.borderColor = nodeColor;
+    card.style.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px ${nodeColor}22`;
+
+    const connectBtn = document.querySelector(".connect-btn");
+    if (connectBtn) {
+        connectBtn.innerHTML = `${title} <span class="btn-icon-placeholder">✨</span>`;
+        
+        connectBtn.style.borderColor = nodeColor;
+        connectBtn.style.boxShadow = `0 0 15px ${nodeColor}33`;
+    }
 });
 
-node.on("mouseover", function() {
-    d3.select(this).select("circle").attr("stroke", "#ffffff").attr("stroke-width", 4);
+node.on("mouseover", function(event, d) {
+    d3.select(this).select("circle")
+        .attr("stroke", "#ffffff")
+        .attr("stroke-width", 3)
+        .style("filter", `drop-shadow(0 0 8px ${color(d.data.group)})`);
 }).on("mouseout", function() {
-    d3.select(this).select("circle").attr("stroke", "#0f172a").attr("stroke-width", 2);
+    d3.select(this).select("circle")
+        .attr("stroke", "#0f172a")
+        .attr("stroke-width", 1.5)
+        .style("filter", "none");
 });
 
 simulation.on("tick", () => {
