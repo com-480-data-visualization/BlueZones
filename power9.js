@@ -76,7 +76,7 @@ node.append("text")
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle")
     .style("fill", "#0f172a") 
-    .style("font-size", d => d.depth === 0 ? "13px" : "10px")
+    .style("font-size", d => d.depth === 0 ? "13px" : "9px")
     .style("font-weight", "600")
     .style("pointer-events", "none")
     .each(function(d) {
@@ -113,7 +113,7 @@ node.on("click", function(event, d) {
 
     const connectBtn = document.querySelector(".connect-btn");
     if (connectBtn) {
-        connectBtn.innerHTML = `${title} <span class="btn-icon-placeholder">✨</span>`;
+        connectBtn.innerHTML = `Power 9 principles <span class="btn-icon-placeholder"></span>`;
         
         connectBtn.style.borderColor = nodeColor;
         connectBtn.style.boxShadow = `0 0 15px ${nodeColor}33`;

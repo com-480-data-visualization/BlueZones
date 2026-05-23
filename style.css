@@ -131,7 +131,7 @@ html {
 
 .landing-page-title {
     position: absolute;
-    top: 45%;
+    top: 40%;
     width: 100%;
     color: var(--color-white);
     display: flex;
@@ -144,8 +144,7 @@ html {
 
 .landing-page-title h1 {
    font-size: 48px;
-   font-family: Georgia, 'Times New Roman', serif;
-   font-weight: normal;
+   font-weight: bold;
    letter-spacing: 0.02em;
 }
 
@@ -157,7 +156,7 @@ html {
 
 .landing-stats {
    position: absolute;
-   bottom: 60px;
+   bottom: 100px;
    width: 100%;
    display: flex;
    justify-content: center;
@@ -181,8 +180,7 @@ html {
 
 
 .stat-number {
-   font-size: 40px;
-   font-family: Georgia, 'Times New Roman', serif;
+   font-size: 28px;
    font-weight: bold;
    line-height: 1;
 }
@@ -259,6 +257,7 @@ html {
 
 .connect-btn {
     display: inline-flex;
+    pointer-events: none;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
@@ -306,9 +305,11 @@ html {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.06) !important; 
     border-radius: 16px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     width: 100%;
+    min-height: max-content !important;
+    height:auto;
 }
 
 
@@ -317,6 +318,7 @@ html {
     visibility: visible !important;
     transform: translateY(0) !important;
 }
+
 
 .site-header, .navbar, .bz-intro-section, #power9-viz text {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
@@ -472,8 +474,8 @@ html {
 
 /* --- Layout Constraints & Sizing --- */
 .approach-container {
-    width: 80% !important; 
-    max-width: 1050px !important;
+    width: 100% !important; 
+    max-width: 1100px !important;
     margin: 0 auto !important;
 }
 
@@ -489,7 +491,7 @@ html {
 .approach-flow .glass-card {
     flex: 1 1 0 !important; 
     min-width: 0 !important;
-    max-width: 320px !important; 
+    max-width: 700px !important; 
 }
 
 .approach-main-title {
@@ -497,6 +499,42 @@ html {
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 20px;
+}
+
+.question-highlight {
+    background: rgba(56, 189, 248, 0.08) !important; 
+    border: 1px solid rgba(56, 189, 248, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    margin: 18px 0 !important;
+    text-align: center !important;
+    box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.05) !important;
+}
+
+.question-icon {
+    font-size: 1.4rem !important;
+    display: block !important;
+    margin-bottom: 10px !important;
+    letter-spacing: 8px !important;
+}
+
+.question-highlight p {
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0 !important;
+}
+
+.question-highlight strong {
+    color: #38bdf8 !important; 
+}
+
+.magic-text {
+    font-style: italic !important;
+    color: #34d399 !important; 
+    text-align: center !important;
+    font-weight: 600 !important;
+    margin-top: 15px !important;
 }
 
 
@@ -531,7 +569,6 @@ html {
     text-align: center;
     margin-top: 60px;
     padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .map-transition p {

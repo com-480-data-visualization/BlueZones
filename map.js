@@ -46,8 +46,8 @@ const themeMapping = {
 let activeMapData   = {};
 let mapCurrentYear  = "2023";
 
-function getCountryData(name) {
-    return activeMapData[name] || null;
+function getCountryData(id) {
+    return activeMapData[id] || null;
 }
 
 d3.json("data/countries-50m.json").then((topojson_raw) => {
@@ -68,7 +68,7 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
             .attr("class", "country")
             .attr("d", pathGenerator)
             .attr("fill", (c) => {
-                const data = getCountryData(c.properties.name || c.properties.NAME);
+                const data = getCountryData(Number(c.id));
                 const val = data ? (data["blue_zone_index"] ?? null) : null;
                 return val !== null ? scales["idx"](val) : "#1e293b"; 
             })
@@ -89,7 +89,7 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
 
                 const countryName = d.properties.name || d.properties.NAME;
                 const tooltip     = d3.select("#radar-tooltip");
-                const countryData = getCountryData(countryName);
+                const countryData = getCountryData(Number(d.id));
 
                 tooltip.style("display", "block").html("");
 
@@ -144,7 +144,7 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
                 .transition()
                 .duration(750)
                 .attr("fill", (c) => {
-                    const data = getCountryData(c.properties.name || c.properties.NAME);
+                    const data = getCountryData(Number(c.id));
                     const val = data ? (data[themeMapping[themeId]] ?? null) : null;
                     return val !== null ? currentScale(val) : "#1e293b";
                 });

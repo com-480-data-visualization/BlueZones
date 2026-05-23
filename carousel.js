@@ -7,7 +7,7 @@ const prevButtonNode = wrapperNode.querySelector('.emblaprev')
 const nextButtonNode = wrapperNode.querySelector('.embla__next')
 
 const emblaApi = EmblaCarousel(viewportNode, { loop: true }, [
-    EmblaCarouselAutoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true })
+    EmblaCarouselAutoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
 ])
 
 const slideToCountry = [

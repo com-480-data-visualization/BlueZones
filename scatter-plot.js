@@ -63,7 +63,7 @@ const radioYAxisMapping = {
     "happy":    "Happiness",
     "activity": "Activity",
     "wine":     "Wine",
-    "plant-based": "Plant Slant",
+    "plant-based": "Plant-based ratio",
     "rule80":   "80% Rule"
 };
 
