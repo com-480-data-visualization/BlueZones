@@ -54,12 +54,12 @@ var yAxis = svgScatterPlot.append("text")
     .attr("x", -heightScatterPlot / 2)
     .attr("fill", "#94a3b8")
     .attr("font-size", "12px")
-    .text("Index Score");
+    .text("Blue Zone Score");
 
 const scatterToolTip = d3.select("#scatter-tooltip");
 
 const radioYAxisMapping = {
-    "idx":      "Index Score",
+    "idx":      "Blue Zone Score",
     "happy":    "Happiness",
     "activity": "Activity",
     "wine":     "Wine",
@@ -128,8 +128,11 @@ const scatterCountryLabel = svgScatterPlot.append("text")
     .style("opacity", 0);
 
 function updateScatterLabel(duration = 400) {
+    const infoBox = document.getElementById("scatter-selected-info");
+
     if (!selectedCountry) {
         scatterCountryLabel.style("opacity", 0);
+        if (infoBox) infoBox.style.opacity = 0;
         return;
     }
 
@@ -141,17 +144,39 @@ function updateScatterLabel(duration = 400) {
         scatterCountryLabel.text(selectedCountry)
             .transition().duration(duration)
             .attr("x", x(countryData["Life expectancy"] ?? 0))
-            .attr("y", y(countryData[dataKey] ?? 0) - 12) 
+            .attr("y", y(countryData[dataKey] ?? 0) - 12)
             .style("opacity", 1);
+
+        if (infoBox) {
+            document.getElementById("scatter-info-country").innerText = selectedCountry;
+            document.getElementById("scatter-info-score").innerText = `Score: ${(countryData[dataKey] ?? 0).toFixed(2)}`;
+            infoBox.style.opacity = 1;
+        }
     } else {
         scatterCountryLabel.style("opacity", 0);
+        if (infoBox) infoBox.style.opacity = 0;
     }
 }
-
 window.highlightCountryOnScatter = function (countryName) {
     selectedCountry = (selectedCountry === countryName) ? null : countryName;
+    
     refreshDotColors();
-    updateScatterLabel(400);
+    updateScatterLabel(400); 
+
+    const infoBox = document.getElementById("scatter-selected-info");
+    if (infoBox) {
+        if (selectedCountry) {
+            const dataKey = radioMappingData[currentButtonId];
+            const countryData = getCurrentScatterData().find(d => d["country"] === selectedCountry);
+            
+            document.getElementById("scatter-info-country").innerText = selectedCountry;
+            document.getElementById("scatter-info-score").innerText = `Score: ${(countryData[dataKey] ?? 0).toFixed(2)}`;
+            
+            infoBox.style.opacity = 1;
+        } else {
+            infoBox.style.opacity = 0;
+        }
+    }
 };
 
 function updateYDomain(data, dataKey) {

@@ -2,24 +2,24 @@ const data = {
     id: "Blue Zones\nHabits", group: 0, radius: 55,
     children: [
         {
-            id: "Eat\nWisely", group: 1, radius: 40, desc: "Dietary habits of the world's longest-lived people.",
+            id: "Eat\nWisely", group: 1, radius: 40, desc: "The core principle of 3 dietary habits of the world's longest-lived people.",
             children: [
-                { id: "Plant\nSlant", group: 1, radius: 30, desc: "Beans, including fava, black, soy and lentils, are the cornerstone of most centenarian diets. Meat is eaten on average only five times per month. Serving sizes are 3-4 oz., about the size of a deck of cards." },
-                { id: "80% Rule", group: 1, radius: 30, desc: "Stop eating when your stomach is 80% full to avoid weight gain." },
-                { id: "Wine at 5", group: 1, radius: 30, desc: "People in all Blue Zones drink alcohol moderately and regularly. 1-2 glasses a day with friends and/or with food." }
+                { id: "Plant\nSlant", group: 1, radius: 30, desc: "Whole grains, nuts, legumes, fruits and vegetables, are the cornerstone of most centenarian diets. Meat and dairy are eaten but generally in smaller quantities." },
+                { id: "80% Rule", group: 1, radius: 30, desc: "Stop eating when your stomach is 80% full, as it takes time for your brain to register that your stomach is satisfied." },
+                { id: "Wine at 5", group: 1, radius: 30, desc: "People in Blue Zones drink alcohol moderately, 1-2 glasses per day maximum with <strong>friends and/or with food</strong>." }
             ]
         },
         {
-            id: "Right\nOutlook", group: 2, radius: 40, desc: "Having a sense of purpose and routines to shed stress.",
+            id: "Right\nOutlook", group: 2, radius: 40, desc: "The mental framework built on 2 essential pillars.",
             children: [
-                { id: "Purpose", group: 2, radius: 30, desc: "Knowing your sense of purpose is worth up to seven years of extra life expectancy." },
-                { id: "Downshift", group: 2, radius: 30, desc: "Stress leads to chronic inflammation. Centenarians have routines to shed that stress: praying, taking a nap, or doing happy hour." }
+                { id: "Purpose", group: 2, radius: 30, desc: "Having a sense of purpose in life means having a reason for waking up in the morning." },
+                { id: "Downshift", group: 2, radius: 30, desc: "Stress leads to chronic inflammation. Centenarians have routines to shed that stress: meditating, taking a nap, or reading." }
             ]
         },
         {
-            id: "Connect", group: 3, radius: 40, desc: "Social networks, family, and community.",
+            id: "Connect", group: 3, radius: 40, desc: "Social networks, family, and community another base for a longer life.",
             children: [
-                { id: "Belong", group: 3, radius: 30, desc: "Attending faith-based services four times per month will add 4-14 years of life expectancy." },
+                { id: "Belong", group: 3, radius: 30, desc: "Cultivate meaningful relationships" },
                 { id: "Loved ones\nfirst", group: 3, radius: 30, desc: "Keeping aging parents and grandparents nearby or in the home. Committing to a life partner." },
                 { id: "Right\nTribe", group: 3, radius: 30, desc: "Choosing social circles that support healthy behaviors." }
             ]
@@ -40,7 +40,7 @@ const svg = d3.select("#power9-viz")
 
 const color = d3.scaleOrdinal()
     .domain([0, 1, 2, 3, 4])
-    .range(["#7dd3fc", "#a7f3d0", "#fef08a", "#e9d5ff", "#fed7aa"]); 
+    .range(["#38bdf8", "#34d399", "#a78bfa", "#f472b6", "#fbbf24"]);
 
 const root = d3.hierarchy(data);
 const links = root.links();
@@ -70,6 +70,8 @@ node.append("circle")
     .attr("fill", d => color(d.data.group))
     .attr("stroke", "#0f172a")
     .attr("stroke-width", 1.5)
+    .style("stroke-dasharray", d => (d.depth === 1 && d.children) ? "6,4" : "none")
+    .style("opacity", d => (d.depth === 1 && d.children) ? 0.6 : 1)
     .style("cursor", "pointer");
 
 node.append("text")
@@ -92,7 +94,7 @@ node.append("text")
 node.on("click", function(event, d) {
     const nodeColor = color(d.data.group);
     const title = d.data.id.replace('\n', ' ');
-    const desc = d.data.desc || "Click on connected bubbles to explore details.";
+    const desc = d.data.desc || "Researchers identified nine key lifestyle principles that may be linked to this exceptional longevity, known as the 'Power 9'. <strong>Click on another bubble to discover them</strong>.";
 
     const card = document.getElementById("power9-card");
     const cardTextContainer = document.getElementById("card-text");
