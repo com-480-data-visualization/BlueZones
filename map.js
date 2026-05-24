@@ -102,7 +102,8 @@ d3.json("data/countries-50m.json").then((topojson_raw) => {
                         { axis: "Happiness",   value: countryData ? (countryData["Life evaluation"] ?? 0) : 0 },
                         { axis: "Wine %",      value: countryData ? (countryData["Wine Consumption"] ?? 0) : 0 }
                     ];
-                    drawRadar(radarData, countryName, "#radar-tooltip");
+                    const scoreBZ = countryData ? (countryData["blue_zone_index"] ?? 0) : 0;
+                    drawRadar(radarData, countryName, scoreBZ, "#radar-tooltip");
                 } else {
                     tooltip.style("width", "max-content").style("padding", "12px 16px");
                     const score = countryData ? (countryData[themeMapping[activeTheme]] ?? 0) : 0;

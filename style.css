@@ -705,6 +705,19 @@ html {
 
 }
 
+.image-source a {
+    display: inline-block !important;
+    margin-top:10px !important; 
+    color: rgba(255, 255, 255, 0.4) !important;
+    text-decoration: none !important; 
+    transition: color 0.3s ease !important;
+}
+
+.image-source a:hover {
+    color: rgba(255, 255, 255, 0.8) !important; 
+    text-decoration: underline !important;    
+}
+
 
 .human-story-banner::after {
     content: '';
@@ -731,7 +744,7 @@ html {
 .banner-content cite {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.1rem;
-    color: #34d399; 
+    color: rgba(255, 255, 255, 0.8); 
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;

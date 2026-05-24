@@ -106,20 +106,52 @@ function refreshDotColors() {
         .transition("colorTrans") 
         .duration(400)
         .style("fill", function (d) {
-            if (d["country"] === selectedCountry) return "#ffffff"; 
+            if (d["country"] === selectedCountry) return "#ef4444"; 
             const rawVal = parseFloat(d[dataKey]) || 0;
             const normalized = maxVal > 0 ? (rawVal / maxVal) : 0;
             return d3.quantize(activeScale, 10)[Math.floor(normalized * 7) + 2] || "#38bdf8";
         })
         .style("opacity", d => (d["country"] === selectedCountry) ? 1 : 0.8)
-        .style("stroke", d => (d["country"] === selectedCountry) ? "#2dd4bf" : "rgba(15, 23, 42, 0.5)")
+        .style("stroke", d => (d["country"] === selectedCountry) ? "#ef4444" : "rgba(15, 23, 42, 0.5)")
         .style("stroke-width", d => (d["country"] === selectedCountry) ? 2 : 0.5)
         .attr("r", d => (d["country"] === selectedCountry) ? 7 : 4.5);
+}
+
+const scatterCountryLabel = svgScatterPlot.append("text")
+    .attr("id", "scatter-country-label")
+    .attr("text-anchor", "middle")
+    .attr("font-size", "14px")
+    .attr("font-weight", "bold")
+    .attr("fill", "#ef4444")
+    .style("pointer-events", "none")
+    .style("text-shadow", "0px 2px 4px rgba(0,0,0,0.8)")
+    .style("opacity", 0);
+
+function updateScatterLabel(duration = 400) {
+    if (!selectedCountry) {
+        scatterCountryLabel.style("opacity", 0);
+        return;
+    }
+
+    const currentData = getCurrentScatterData();
+    const dataKey = radioMappingData[currentButtonId];
+    const countryData = currentData.find(d => d["country"] === selectedCountry);
+
+    if (countryData) {
+        scatterCountryLabel.text(selectedCountry)
+            .transition().duration(duration)
+            .attr("x", x(countryData["Life expectancy"] ?? 0))
+            .attr("y", y(countryData[dataKey] ?? 0) - 12) 
+            .style("opacity", 1);
+    } else {
+        scatterCountryLabel.style("opacity", 0);
+    }
 }
 
 window.highlightCountryOnScatter = function (countryName) {
     selectedCountry = (selectedCountry === countryName) ? null : countryName;
     refreshDotColors();
+    updateScatterLabel(400);
 };
 
 function updateYDomain(data, dataKey) {
@@ -149,6 +181,7 @@ function updateScatterForYear(year) {
         .attr("cy", d => y(d[dataKey] ?? 0));
 
     refreshDotColors();
+    updateScatterLabel(750);
 }
 
 d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
@@ -190,7 +223,7 @@ d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
         })
         .on("mouseout", function (event, d) {
             const point = d3.select(this);
-            const origColor = point.attr("data-orig-color") || "#2dd4bf";
+            const origColor = point.attr("data-orig-color");
 
             point.transition().duration(100)
                 .attr("r", d["country"] === selectedCountry ? 7 : 4.5)
@@ -199,6 +232,7 @@ d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
             
             scatterToolTip.style("display", "none");
         });
+    refreshDotColors();
 
     d3.selectAll("input[name='bz']").on("change.scatter-plot", function (event) {
         currentButtonId  = event.target.id;
@@ -215,6 +249,7 @@ d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
             .attr("cy", d => y(d[dataKey] ?? 0));
 
         refreshDotColors();
+        updateScatterLabel(750);
     });
 
     document.addEventListener("themeChange", function (e) {
@@ -232,6 +267,7 @@ d3.json("data/blue-zone-index-scatter-plot-by-year.json").then((yearData) => {
             .attr("cy", d => y(d[dataKey] ?? 0));
 
         refreshDotColors();
+        updateScatterLabel(750);
     });
 
     document.addEventListener("yearChange", function (e) {
