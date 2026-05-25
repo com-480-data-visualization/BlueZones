@@ -688,7 +688,7 @@ html {
         rgba(11, 15, 25, 0.6),
         rgba(11, 15, 25, 0.9)
       ),
-      url('https://static.nationalgeographic.fr/files/styles/image_3200/public/woman-interior-okinawa-japan.webp?w=1279&h=854&q=100');
+      url('img/woman-interior-okinawa-japan.webp');
     background-size: cover;
     background-position: center 30%;
     background-attachment: fixed; 
@@ -706,8 +706,10 @@ html {
 }
 
 .banner-content p a {
-    color: #e2e8f0;
-    font-size: 0.95rem;
+    display: inline-block !important;
+    margin-top:10px !important; 
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.7rem;
     text-decoration: none
 }
 
@@ -717,9 +719,10 @@ html {
 
 .image-source a {
     display: inline-block !important;
-    margin-top:10px !important; 
-    color: rgba(255, 255, 255, 0.4) !important;
+    margin-top:0px !important; 
+    color: rgba(255, 255, 255, 0.2) !important;
     text-decoration: none !important; 
+    font-size: 0.7rem;
     transition: color 0.3s ease !important;
 }
 
