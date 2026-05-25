@@ -705,6 +705,16 @@ html {
 
 }
 
+.banner-content p a {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    text-decoration: none
+}
+
+.banner-content p a:hover {
+    text-decoration: underline
+}
+
 .image-source a {
     display: inline-block !important;
     margin-top:10px !important; 
