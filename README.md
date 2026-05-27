@@ -26,6 +26,13 @@
 
 **80% of the final grade**
 
+We recommend using Google Chrome to visit our website.
+
+[Website](https://com-480-data-visualization.github.io/BlueZones/)
+
+Process book (PDF)
+
+[Screencast](https://drive.google.com/file/d/1KXCaXPjfBPm9d168H0eEHgNsxRWohVLi/view?usp=sharing)
 
 ## Late policy
 
