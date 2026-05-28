@@ -36,7 +36,7 @@ const height = 500;
 const svg = d3.select("#power9-viz")
     .append("svg")
     .attr("viewBox", [0, 0, width, height])
-    .attr("style", "max-width: 100%; height: auto; overflow: visible;"); 
+    .attr("style", "width: 100%; height: auto; overflow: visible;"); 
 
 const color = d3.scaleOrdinal()
     .domain([0, 1, 2, 3, 4])

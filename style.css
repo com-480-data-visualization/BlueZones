@@ -987,7 +987,7 @@ html {
 }
 
 .blue-zone-card-front {
-    z-index: 2;
+    z-index: 0;
 }
 
 .blue-zone-card-back {
