@@ -106,11 +106,6 @@ BlueZones/
 ├── animation_landingpage.js         # Parallax fade on scroll for landing title
 │
 ├── data/
-│   ├── blue-zone-index-by-year.json               # Map data keyed by year and country ID
-│   ├── blue-zone-index-scatter-plot-by-year.json  # Scatter data keyed by year
-│   ├── countries-50m.json                         # TopoJSON for the map
-│   └── countries-110m.json                        # TopoJSON for the globe
-│
 ├── img/                             # Card and banner images
 ├── video/                           # Landing page background video
 └── lib/
