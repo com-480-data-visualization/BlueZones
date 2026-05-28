@@ -214,10 +214,12 @@ html {
     width: 100%;
     color: white;
     font-size: 12px;
-    opacity: 1;
     margin-bottom: 70px;
 }
 
+.source-video a {
+    color: white;
+}
 
 .bz-intro-section {
     background-color: var(--color-bg-page) !important;
