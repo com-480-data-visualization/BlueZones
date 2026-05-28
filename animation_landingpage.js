@@ -15,3 +15,4 @@ window.addEventListener('scroll', () => {
 
     titleBlock.style.transform = `translateY(${scrollPosition * (-0.4)}px)`;
 });
+

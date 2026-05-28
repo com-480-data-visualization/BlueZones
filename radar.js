@@ -1,4 +1,4 @@
-function drawRadar(data, countryName, selector) {
+function drawRadar(data, countryName, score, selector) {
     const width = 340;
     const height = 260;
     const margin = 50;
@@ -88,4 +88,13 @@ function drawRadar(data, countryName, selector) {
         .style("fill", "#1e3a8a") 
         .style("stroke", "#0a01bb")
         .style("stroke-width", 1);
+
+    svg.append("text")
+        .attr("x", 0)
+        .attr("y", 110) 
+        .attr("text-anchor", "middle")
+        .style("fill", "#38bdf8") 
+        .style("font-size", "15px")
+        .style("font-weight", "bold")
+        .text(`Blue Zone Score: ${(score || 0).toFixed(2)}`);
 }
