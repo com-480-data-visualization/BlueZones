@@ -6,9 +6,7 @@ const viewportNode = wrapperNode.querySelector('.embla__viewport')
 const prevButtonNode = wrapperNode.querySelector('.emblaprev')
 const nextButtonNode = wrapperNode.querySelector('.embla__next')
 
-const emblaApi = EmblaCarousel(viewportNode, { loop: true }, [
-    EmblaCarouselAutoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
-])
+const emblaApi = EmblaCarousel(viewportNode, { loop: true })
 
 const slideToCountry = [
     "Japan",
@@ -39,4 +37,19 @@ emblaApi.on("select", notifyActiveCountry)
 emblaApi.on("reInit", notifyActiveCountry)
 notifyActiveCountry()
 
-emblaApi.plugins().autoplay?.play()
+let autoplayTimer = null
+
+const startAutoplay = () => {
+    clearInterval(autoplayTimer)
+    autoplayTimer = setInterval(() => emblaApi.scrollNext(), 4000)
+}
+
+const stopAutoplay = () => {
+    clearInterval(autoplayTimer)
+    autoplayTimer = null
+}
+
+wrapperNode.addEventListener('mouseenter', stopAutoplay)
+wrapperNode.addEventListener('mouseleave', startAutoplay)
+
+startAutoplay()
