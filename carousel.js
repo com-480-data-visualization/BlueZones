@@ -1,4 +1,4 @@
-// Code from documentation: https://www.embla-carousel.com/docs/v8/get-started/cdn
+// Parts of the code from documentation: https://www.embla-carousel.com/docs/v8/get-started/cdn
 // Scale effect code from: https://www.embla-carousel.com/docs/v8/examples/predefined#scale
 
 const wrapperNode = document.querySelector('.embla')

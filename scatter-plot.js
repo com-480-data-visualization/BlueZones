@@ -1,3 +1,5 @@
+// Parts of the code for this scatter plot inspired from https://d3-graph-gallery.com/graph/scatter_basic.html and https://d3-graph-gallery.com/graph/custom_theme.html
+
 const blueZonesCountries = ["Japan", "Greece", "Italy", "Costa Rica", "United States of America"];
 
 const drawer    = document.getElementById('scatter-panel');
