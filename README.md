@@ -47,7 +47,7 @@ We recommend using Google Chrome to visit our website.
 | **The 5 Blue Zones** | Flippable card carousel with a rotating 3D globe |
 | **Process** | Methodology, how 9 qualitative habits became 5 measurable pillars |
 | **Explore the World** | World map + correlation scatter plot |
-| **Quiz** | 5-question knowledge check with with a final score |
+| **Quiz** | 5-question knowledge check with a final score |
 
 ### Visualizations
 
@@ -81,10 +81,10 @@ Either click on the following link: [Website](https://com-480-data-visualization
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/com-480-data-visualization/BlueZones.git](https://github.com/com-480-data-visualization/BlueZones.git)
+   git clone https://github.com/com-480-data-visualization/BlueZones.git
    cd BlueZones
 2. python -m http.server 8000
-3. Open your browser and navigate to http://localhost:8000. We highly recommend using Google Chrome for the best experience.
+3. Open your browser and navigate to http://localhost:8000. We highly recommend using **Google Chrome** for the best experience.
 
 
 ### Project Structure
@@ -126,8 +126,6 @@ BlueZones/
 | Wine consumption | [Our World in Data](https://ourworldindata.org/grapher/wine-consumption-per-capita) |
 | Plant-based diet ratio and 80% Rule (caloric intake proxy) | [Our World in Data](https://ourworldindata.org/grapher/dietary-composition-by-country) |
 | Blue Zone Score | Index derived from the above |
-
-Power 9 principles: Buettner & Skemp, *[Blue Zones](https://pmc.ncbi.nlm.nih.gov/articles/PMC6125071/)*, American Journal of Lifestyle Medicine, 2016.
 
 ## Late policy
 
