@@ -10,21 +10,15 @@
 
 ## Milestone 1 (20th March, 5pm)
 
-**10% of the final grade**
-
 [Milestone 1 report (PDF)](Milestone1/Milestone1_report.pdf)
 
 ## Milestone 2 (17th April, 5pm)
-
-**10% of the final grade**
 
 [Milestone 2 report (PDF)](Milestone2/Milestone2_report.pdf)
 
 [Milestone 2 Website](https://com-480-data-visualization.github.io/BlueZones/)
 
 ## Milestone 3 (29th May, 5pm)
-
-**80% of the final grade**
 
 We recommend using Google Chrome to visit our website.
 
@@ -55,7 +49,7 @@ We recommend using Google Chrome to visit our website.
 A D3 force-directed graph showing the nine pillars of Blue Zones grouped into four clusters (Eat Wisely, Right Outlook, Connect, Move Naturally). Nodes are draggable, clicking a bubble updates the info card on the left. The cards content has been extracted from the following [source](https://pmc.ncbi.nlm.nih.gov/articles/PMC6125071/)
 
 **Cards Carousel + Globe** (`carousel.js`, `cards.js`, `globe.js`)  
-An Embla Carousel with a scale-tween effect displays the five Blue Zone location cards. It rotates continuously and stops when hovering over it or flipping on a card and restart rotating when flipping it back or moving the mouse away from this area. Cards flip on click to reveal fun facts. The globe rotates to the active Blue Zone as the carousel scrolls.
+An Embla Carousel with a scale-tween effect displays the five Blue Zone location cards. It rotates continuously or by mouse drag, pauses on hover, and resumes when the mouse leaves the carousel area. Cards flip on click to reveal fun facts. As the carousel scrolls, the globe rotates to the active Blue Zone.
 
 **World Map** (`map.js`)  
 A Map built with D3 + TopoJSON. Six metrics are selectable via radio buttons: Blue Zone Score, Happiness, Activity, Wine, Plant Slant (Ratio computed by summing daily calorie intake from plant-based columns (wheat, rice, maize, fruits, vegetables, nuts, pulses, etc.) divided by the country's daily average per capita per year total caloric intake), and the 80% Rule (Quantified via a scoring function based on daily caloric intake: an optimal intake up to 2100 kcal scores 1.0, while excessive overeating or severe undereating (< 1200 kcal) are penalized). A year slider (1965–2024, metric-dependent) animates the map over time. Hovering a country shows a radar chart (Blue Zone Score mode) or a simple score (other modes).
@@ -121,10 +115,5 @@ BlueZones/
 | Wine consumption | [Our World in Data](https://ourworldindata.org/grapher/wine-consumption-per-capita) |
 | Plant-based diet ratio and 80% Rule (caloric intake proxy) | [Our World in Data](https://ourworldindata.org/grapher/dietary-composition-by-country) |
 | Blue Zone Score | Index derived from the above |
-
-## Late policy
-
-- < 24h: 80% of the grade for the milestone
-- < 48h: 70% of the grade for the milestone
 
 ---
