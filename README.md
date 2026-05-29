@@ -46,7 +46,7 @@ We recommend using Google Chrome to visit our website.
 ### Visualizations
 
 **Power 9 Bubble Chart** (`power9.js`)  
-A D3 force-directed graph showing the nine pillars of Blue Zones grouped into four clusters (Eat Wisely, Right Outlook, Connect, Move Naturally). Nodes are draggable, clicking a bubble updates the info card on the left. The cards content has been extracted from the following [source](https://pmc.ncbi.nlm.nih.gov/articles/PMC6125071/)
+A D3 force-directed graph showing the nine pillars of Blue Zones grouped into four clusters (Eat Wisely, Right Outlook, Connect, Move Naturally). Nodes are draggable, clicking a bubble updates the info card on the left. The cards content has been extracted from the following [source](https://pmc.ncbi.nlm.nih.gov/articles/PMC6125071/).
 
 **Cards Carousel + Globe** (`carousel.js`, `cards.js`, `globe.js`)  
 An Embla Carousel with a scale-tween effect displays the five Blue Zone location cards. It rotates continuously or by mouse drag, pauses on hover, and resumes when the mouse leaves the carousel area. Cards flip on click to reveal fun facts. As the carousel scrolls, the globe rotates to the active Blue Zone.
