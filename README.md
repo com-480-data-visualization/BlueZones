@@ -97,7 +97,7 @@ BlueZones/
 ├── cards.js                         # Card flip interaction 
 ├── carousel.js                      # Embla carousel init + globe sync
 ├── EmblaCarouselTweenScale.js       # Scale tween plugin for carousel
-├── animation_landingpage.js         # Parallax fade on scroll for landing title
+├── animation_landingpage.js         # Fade on scroll for landing title
 │
 ├── data/
 ├── img/                             # Card and banner images
